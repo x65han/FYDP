@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "node server.js",
-    "postinstall": "cd web-uploader;npm install",
-    "client": "npm start --prefix web-uploader",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

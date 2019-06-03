@@ -4,6 +4,7 @@ const app = express()
 const fileUpload = require('express-fileupload')
 app.use(fileUpload())
 
+app.use('/', express.static('build'))
 app.use('/uploads', express.static('uploads'))
 app.use('/upload', require('./controllers/upload_controller'))
 
