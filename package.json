@@ -1,0 +1,28 @@
+{
+  "name": "FYDP",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node server.js",
+    "postinstall": "cd web-uploader;npm install",
+    "client": "npm start --prefix web-uploader",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x65han/FYDP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/x65han/FYDP/issues"
+  },
+  "homepage": "https://github.com/x65han/FYDP#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.4"
+  }
+}
