@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs')
+
+router.get('/list', (req, res) => {
+    const files = fs.readdirSync("./uploads")
+    return res.status(200).send(files)
+})
 
 router.post('/', (req, res) => {
     if (req.files === null) {
