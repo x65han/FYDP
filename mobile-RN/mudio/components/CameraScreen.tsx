@@ -2,16 +2,16 @@ import React from 'react';
 import {
   Text, View, Image,
   StyleSheet, SafeAreaView,
-  Dimensions, TouchableOpacity
+  Dimensions, Switch, TouchableOpacity
 } from 'react-native';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   mutators, Session,
   Consumer, FlashMode,
-  selectors,
+  selectors, CameraSettings
 } from './data';
 import { NavigationScreenProps } from 'react-navigation';
-import { Camera, Permissions, CameraObject } from 'expo';
+import { Camera, Permissions, CameraObject, Video } from 'expo';
 import TimestampUtil from './services/TimestampUtil';
 
 enum UiState {
@@ -27,10 +27,10 @@ const buttonSize = 48;
 const buttonLargeSize = 64;
 
 const flashModeOrder = {
-  off: 'on',
-  on: 'auto',
-  auto: 'torch',
-  torch: 'off',
+  off: FlashMode.on,
+  on: FlashMode.auto,
+  auto: FlashMode.torch,
+  torch: FlashMode.off,
 };
 const flashIcons = {
   off: 'flash-off',
@@ -62,16 +62,18 @@ export default class CameraScreen extends React.Component<Props, State> {
   };
 
   async componentDidMount() {
+    // Permissions.CAMERA
+    const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
     // Permissions.AUDIO_RECORDING
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const audioPermission = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
 
-    const uiState = (status === 'granted') ? UiState.Capturing : UiState.NoPermissions;
-
+    const uiState = (audioPermission.status === 'granted' && cameraPermission.status === 'granted') ? UiState.Capturing : UiState.NoPermissions;
     this.setState({ uiState });
   }
 
   private takePhoto = async () => {
-    if (this.camera) {
+    console.log('taking photo')
+    if (this.camera && this.state.isVideo === false) {
       this.setState({ cameraRolling: true });
       try {
         const photo = await this.camera.takePictureAsync();
@@ -84,16 +86,21 @@ export default class CameraScreen extends React.Component<Props, State> {
   };
 
   private takeVideo = async () => {
-    if (this.camera) {
+    console.warn('Taking video .....')
+    if (this.camera && this.state.isVideo === true) {
       this.setState({ cameraRolling: true });
       try {
         const video = await this.camera.recordAsync({
           quality: Camera.Constants.VideoQuality['720p'],
           maxDuration: 10
         });
+        console.log('video', video)
+        console.log('video uri', video.uri)
+        console.log('video uri type', typeof video.uri)
         this.setState({ preview: video, uiState: UiState.ReviewPhoto })
       } catch (error) {
       } finally {
+        console.log('camera rolling false')
         this.setState({ cameraRolling: false })
       }
     }
@@ -126,24 +133,12 @@ export default class CameraScreen extends React.Component<Props, State> {
     this.props.navigation.goBack();
   };
 
-  private flipCamera(): void {
-    mutators.saveCameraSettings({
-      ...selectors.cameraSettings,
-      type:
-        selectors.cameraSettings.type === Camera.Constants.Type.back
-          ? Camera.Constants.Type.front
-          : Camera.Constants.Type.back,
-    })
+  private toggleVideoSwitch = () => {
+    this.setState(prev => ({ isVideo: !prev.isVideo }))
   }
 
-  private toggleFlashMode(): void {
-    mutators.saveCameraSettings({
-      ...selectors.cameraSettings,
-      flashMode: 'off'
-      // flashMode: flashModeOrder[
-      //   selectors.cameraSettings.flashMode
-      // ] as FlashMode,
-    })
+  private saveCameraSettings(cameraSettings: CameraSettings): void {
+    mutators.saveCameraSettings({ cameraSettings })
   }
 
   render() {
@@ -159,31 +154,47 @@ export default class CameraScreen extends React.Component<Props, State> {
     );
 
     const topButtons = () => (
-      <>
-        <MaterialCommunityIcons
-          // name={flashIcons[selectors.cameraSettings.flashMode]}
-          name='torch'
-          color="white"
-          size={38}
-          style={{
-            position: 'absolute',
-            top: 60,
-            left: 30,
-          }}
-          onPress={this.toggleFlashMode}
-        />
-        <MaterialCommunityIcons
-          name="rotate-3d"
-          color="white"
-          size={38}
-          style={{
-            position: 'absolute',
-            top: 60,
-            right: 30,
-          }}
-          onPress={this.flipCamera}
-        />
-      </>
+      <Consumer select={[selectors.getCameraSettings()]}>
+        {(cameraSettings: CameraSettings) => (
+          <>
+            {this.state.isVideo === false && <MaterialCommunityIcons
+              name={flashIcons[cameraSettings.flashMode]}
+              color="white"
+              size={38}
+              style={{
+                position: 'absolute',
+                top: 60,
+                left: 30,
+              }}
+              onPress={() => {
+                this.saveCameraSettings({
+                  ...cameraSettings,
+                  flashMode: flashModeOrder[cameraSettings.flashMode] as FlashMode
+                })
+              }}
+            />}
+            <MaterialCommunityIcons
+              name="rotate-3d"
+              color="white"
+              size={38}
+              style={{
+                position: 'absolute',
+                top: 60,
+                right: 30,
+              }}
+              onPress={() => {
+                this.saveCameraSettings({
+                  ...cameraSettings,
+                  type:
+                    cameraSettings.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back,
+                });
+              }}
+            />
+          </>
+        )}
+      </Consumer>
     );
 
     return (
@@ -206,7 +217,7 @@ export default class CameraScreen extends React.Component<Props, State> {
                     { justifyContent: 'center', alignItems: 'center' },
                   ]}
                 >
-                  <Text>No access to camera</Text>
+                  <Text>No access to camera/Audio</Text>
                   <ControlBar>{closeButton}</ControlBar>
                 </SafeAreaView>
               );
@@ -214,49 +225,47 @@ export default class CameraScreen extends React.Component<Props, State> {
             case UiState.Capturing: {
               return (
                 <SafeAreaView style={styles.root}>
-                  <Camera
-                    style={styles.fullScreen}
-                    type={selectors.cameraSettings.type}
-                    flashMode={selectors.cameraSettings.flashMode}
-                    ref={(ref: any) => {
-                      this.camera = ref;
-                    }}
-                  >
-                    {topButtons()}
-                    <ControlBar>
-                      {closeButton}
-                      {cameraRolling ? (
-                        <FontAwesome
-                          name="spinner"
-                          size={buttonLargeSize}
-                          color="#fff"
-                          style={styles.centerButton}
-                        />
-                      ) : (
+                  <Consumer select={[selectors.getCameraSettings()]}>
+                    {(cameraSettings: CameraSettings) => (
+                      <Camera
+                        style={styles.fullScreen}
+                        type={cameraSettings.type}
+                        flashMode={cameraSettings.flashMode}
+                        ref={(ref: any) => { this.camera = ref }}
+                      >
+                        {topButtons()}
+                        <ControlBar>
+                          {closeButton}
                           <TouchableOpacity
                             onPress={() => {
-                              console.log('on short press')
-                              this.takePhoto()
+                              if (this.state.isVideo === true && this.state.cameraRolling === true) {
+                                console.log('> stop video')
+                                this.camera && this.camera.stopRecording()
+                              } else if (this.state.isVideo === true && this.state.cameraRolling === false) {
+                                console.log('> take video')
+                                this.takeVideo()
+                              } else {
+                                console.log('> take photo')
+                                this.takePhoto()
+                              }
                             }}
-                            onPressIn={() => {
-                              console.log('on press IN')
-                            }}
-                            onPressOut={() => {
-                              console.log('on press OUT')
-                            }}
-                            onLongPress={() => {
-                              console.log('on long press')
-                            }}>
+                          >
                             <FontAwesome
-                              name="camera"
+                              name={cameraRolling ? 'spinner' : this.state.isVideo ? "video-camera" : 'camera'}
                               size={buttonLargeSize}
                               color="#FFF"
                               style={styles.centerButton}
                             />
                           </TouchableOpacity>
-                        )}
-                    </ControlBar>
-                  </Camera>
+
+                          <Switch
+                            onValueChange={this.toggleVideoSwitch}
+                            value={this.state.isVideo}
+                          />
+                        </ControlBar>
+                      </Camera>
+                    )}
+                  </Consumer>
                 </SafeAreaView>
               );
             }
@@ -264,16 +273,31 @@ export default class CameraScreen extends React.Component<Props, State> {
               if (preview) {
                 return (
                   <SafeAreaView style={{ flex: 1 }}>
-                    <Image
-                      style={[styles.fullScreen, styles.picturePreview]}
-                      source={{ uri: preview.uri }}
-                    />
+                    {
+                      this.state.isVideo ?
+                        <Video
+                          source={{ uri: preview.uri }}
+                          rate={1.0}
+                          volume={1.0}
+                          isMuted={false}
+                          resizeMode="cover"
+                          shouldPlay
+                          isLooping
+                          style={styles.fullScreen}
+                        />
+                        :
+                        <Image
+                          style={[styles.fullScreen, styles.picturePreview]}
+                          source={{ uri: preview.uri }}
+                        />
+                    }
                     <ControlBar>
                       {closeButton}
                       <FontAwesome
                         name="undo"
                         size={buttonLargeSize}
-                        color="#FFF"
+                        color="red"
+                        // color="#FFF"
                         onPress={this.redoPhoto}
                         style={styles.centerButton}
                       />

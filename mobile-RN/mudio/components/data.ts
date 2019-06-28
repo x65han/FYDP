@@ -20,7 +20,7 @@ export interface CameraSettings {
   flashMode: FlashMode;
 }
 
-export const helper = {
+export const DataHelper = {
   folderPath(sessionKey: string) {
     return FileSystem.documentDirectory + encodeURIComponent(sessionKey) + '/';
   },
@@ -37,20 +37,17 @@ export const { Provider, Consumer, createSelector, mutate } = createState();
 
 export const selectors = {
   getSession(sessionKey: string): (state: ApplicationState) => Session {
-    return createSelector((state: ApplicationState) =>{
-      console.log('hit')
-      console.log(state)
-      console.log('-=--=-=-=-=-')
-      return state.dictionary.get(sessionKey)
+    return createSelector((state: ApplicationState) => {
+      return state.dictionary[sessionKey] as Session
     }
     );
   },
   getCameraSettings(): (state: ApplicationState) => CameraSettings {
-    return createSelector((state: ApplicationState) =>
-      state.cameraSettings
-    )
+    return createSelector((state: ApplicationState) => {
+      return state.cameraSettings
+    })
   },
-  cameraSettings: createSelector((state: ApplicationState) => state.cameraSettings)
+  cameraSettings: createSelector((state: ApplicationState) => state.cameraSettings),
 };
 
 export interface Session {
@@ -59,14 +56,14 @@ export interface Session {
 
 export interface ApplicationState {
   history: Array<String>; // sessionKey from the latest to oldest
-  dictionary: Map<String, Session>;
+  dictionary: any;
   cameraSettings: CameraSettings;
 }
 
 export const initialState: ApplicationState = {
   history: [],
-  dictionary: new Map(),
-  cameraSettings: helper.createNewCameraSettings()
+  dictionary: {},
+  cameraSettings: DataHelper.createNewCameraSettings()
 };
 
 export const mutators = {
@@ -80,12 +77,12 @@ export const mutators = {
     // Create new Directory to save photos
     await FileSystem.makeDirectoryAsync(sessionKey, { intermediates: true })
     // Formulate filepath and copy image to file path
-    const filePath = helper.folderPath(sessionKey) + '.jpg';
+    const filePath = DataHelper.folderPath(sessionKey) + '.jpg';
     await FileSystem.copyAsync({ from: photoUri, to: filePath });
 
     mutate((draft: ApplicationState) => {
       draft.history.unshift(sessionKey) // push to the front of the array
-      draft.dictionary.set(sessionKey, helper.createNewSession(photoUri))
+      draft.dictionary[sessionKey] = DataHelper.createNewSession(photoUri)
     })
   },
   saveCameraSettings({
