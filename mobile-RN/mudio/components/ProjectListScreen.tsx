@@ -14,7 +14,7 @@ import {
   NavigationActions,
 } from 'react-navigation';
 import { RouteConfig, RouteParams } from './Router';
-// import {  Consumer, selectors } from './data';
+import { Consumer, ApplicationState } from './data';
 import ProjectListItem from './ProjectListItem';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -48,12 +48,12 @@ export default class ProjectListScreen extends React.Component<Props> {
   render() {
     return (
       <View style={styles.root}>
-        {/* <Consumer select={[selectors.projects]}>
-          {(projects: Array<Project>) =>
-            projects.length ? (
+        <Consumer>
+          {(state: ApplicationState) =>
+            state.history.length ? (
               <FlatList
-                data={projects}
-                keyExtractor={(i: Project, index) => i.title + index}
+                data={state.history}
+                keyExtractor={(i: string, index) => i + index}
                 ItemSeparatorComponent={
                   Platform.OS === 'ios'
                     ? ({ highlighted }) => (
@@ -67,44 +67,44 @@ export default class ProjectListScreen extends React.Component<Props> {
                     : null
                 }
                 renderItem={({ item, separators }) => (
-                  <ProjectListItem
-                    onPress={this.onPressItem}
-                    separators={separators}
-                    {...item}
-                  />
+                  <Text>{item}</Text>
+                  // <ProjectListItem
+                  //   onPress={this.onPressItem}
+                  //   separators={separators}
+                  //   {...item}
+                  // />
                 )}
               />
             ) : (
-                <TouchableOpacity
-                  style={styles.empty}
-                  onPress={() =>
-                    this.props.navigation.navigate(RouteConfig.CreateProject)
-                  }
-                >
+                <View style={styles.empty} >
                   <MaterialCommunityIcons
                     name="flask-empty-outline"
                     size={deviceWidth / 2}
                     color="black"
                   />
                   <Text style={{ fontSize: 38 }}>No History</Text>
-                </TouchableOpacity>
-              )
-          }
-        </Consumer> */}
+                </View>
+              )}
+        </Consumer>
 
-        <SafeAreaView style={styles.floatingContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate(RouteConfig.CameraScreen)
-            }}>
-            <FontAwesome
-              name="plus-circle"
-              size={100}
-              color="green"
-            />
-          </TouchableOpacity>
-        </SafeAreaView>
-      </View>
+        <Consumer>
+          {(state: ApplicationState) =>
+            < SafeAreaView style={styles.floatingContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  console.log(state)
+                  this.props.navigation.navigate(RouteConfig.CameraScreen)
+                }}>
+                <FontAwesome
+                  name="plus-circle"
+                  size={100}
+                  color="green"
+                />
+              </TouchableOpacity>
+            </SafeAreaView>
+          }
+        </Consumer>
+      </View >
     );
   }
 }

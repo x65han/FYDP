@@ -4,8 +4,7 @@ import { Consumer, ApplicationState, initialState } from './data';
 import Router from './Router';
 import { Provider } from './data';
 
-const applicationStateKey = 'ApplicationState';
-
+export const applicationStateKey = 'ApplicationState';
 const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null;
 
 export default class Root extends React.Component {
@@ -24,7 +23,7 @@ export default class Root extends React.Component {
   }
 
   async componentDidMount() {
-    await this.clearData();
+    // await this.clearData();
     const rawData = await AsyncStorage.getItem(applicationStateKey);
     this.setState({
       initialState: rawData ? JSON.parse(rawData) : initialState,

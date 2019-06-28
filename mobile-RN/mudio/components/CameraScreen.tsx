@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Text, View, Image,
   StyleSheet, SafeAreaView,
-  Dimensions, Switch, TouchableOpacity
+  Dimensions, Switch, TouchableOpacity, AsyncStorage
 } from 'react-native';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import {
@@ -13,6 +13,7 @@ import {
 import { NavigationScreenProps } from 'react-navigation';
 import { Camera, Permissions, CameraObject, Video } from 'expo';
 import TimestampUtil from './services/TimestampUtil';
+import { applicationStateKey } from './Root'
 
 enum UiState {
   AskingForPermissions,
@@ -69,10 +70,15 @@ export default class CameraScreen extends React.Component<Props, State> {
 
     const uiState = (audioPermission.status === 'granted' && cameraPermission.status === 'granted') ? UiState.Capturing : UiState.NoPermissions;
     this.setState({ uiState });
+
+    const rawApplicationState = await AsyncStorage.getItem(applicationStateKey)
+    if (rawApplicationState) {
+      const applicationState = JSON.parse(rawApplicationState)
+      this.setState({isVideo:applicationState.cameraSettings.isVideo})
+    }
   }
 
   private takePhoto = async () => {
-    console.log('taking photo')
     if (this.camera && this.state.isVideo === false) {
       this.setState({ cameraRolling: true });
       try {
@@ -86,7 +92,6 @@ export default class CameraScreen extends React.Component<Props, State> {
   };
 
   private takeVideo = async () => {
-    console.warn('Taking video .....')
     if (this.camera && this.state.isVideo === true) {
       this.setState({ cameraRolling: true });
       try {
@@ -94,13 +99,9 @@ export default class CameraScreen extends React.Component<Props, State> {
           quality: Camera.Constants.VideoQuality['720p'],
           maxDuration: 10
         });
-        console.log('video', video)
-        console.log('video uri', video.uri)
-        console.log('video uri type', typeof video.uri)
         this.setState({ preview: video, uiState: UiState.ReviewPhoto })
       } catch (error) {
       } finally {
-        console.log('camera rolling false')
         this.setState({ cameraRolling: false })
       }
     }
@@ -123,7 +124,8 @@ export default class CameraScreen extends React.Component<Props, State> {
     try {
       await mutators.savePhoto({
         sessionKey: this.state.sessionKey,
-        photoUri: photoPreview.uri,
+        uri: photoPreview.uri,
+        isVideo: this.state.isVideo
       });
     } catch (error) {
       this.redoPhoto();
@@ -133,8 +135,14 @@ export default class CameraScreen extends React.Component<Props, State> {
     this.props.navigation.goBack();
   };
 
-  private toggleVideoSwitch = () => {
-    this.setState(prev => ({ isVideo: !prev.isVideo }))
+  private toggleVideoSwitch = (cameraSettings: CameraSettings) => {
+    this.setState(prev => {
+      this.saveCameraSettings({
+        ...cameraSettings,
+        isVideo: !prev.isVideo
+      })
+      return { isVideo: !prev.isVideo }
+    })
   }
 
   private saveCameraSettings(cameraSettings: CameraSettings): void {
@@ -259,7 +267,20 @@ export default class CameraScreen extends React.Component<Props, State> {
                           </TouchableOpacity>
 
                           <Switch
-                            onValueChange={this.toggleVideoSwitch}
+                            onPress={() => {
+                              this.saveCameraSettings({
+                                ...cameraSettings,
+                                type:
+                                  cameraSettings.type === Camera.Constants.Type.back
+                                    ? Camera.Constants.Type.front
+                                    : Camera.Constants.Type.back,
+                              });
+                            }}
+
+
+                            onValueChange={() => {
+                              this.toggleVideoSwitch(cameraSettings)
+                            }}
                             value={this.state.isVideo}
                           />
                         </ControlBar>

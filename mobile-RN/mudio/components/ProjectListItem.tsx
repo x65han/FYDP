@@ -20,6 +20,7 @@ interface Props extends Project {
 export default class ProjectListItem extends React.Component<Props> {
   render() {
     const { separators, title, lastPhoto } = this.props;
+    console.log(this.props)
     return (
       <TouchableHighlight
         style={styles.root}

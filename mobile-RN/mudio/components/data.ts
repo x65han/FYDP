@@ -18,6 +18,7 @@ export enum FlashMode {
 export interface CameraSettings {
   type: string;
   flashMode: FlashMode;
+  isVideo: boolean;
 }
 
 export const DataHelper = {
@@ -29,7 +30,8 @@ export const DataHelper = {
   }),
   createNewCameraSettings: () => ({
     type: Camera.Constants.Type.front,
-    flashMode: FlashMode.off
+    flashMode: FlashMode.off,
+    isVideo: false,
   })
 };
 
@@ -47,7 +49,7 @@ export const selectors = {
       return state.cameraSettings
     })
   },
-  cameraSettings: createSelector((state: ApplicationState) => state.cameraSettings),
+  // cameraSettings: createSelector((state: ApplicationState) => state.cameraSettings),
 };
 
 export interface Session {
@@ -55,7 +57,7 @@ export interface Session {
 }
 
 export interface ApplicationState {
-  history: Array<String>; // sessionKey from the latest to oldest
+  history: Array<string>; // sessionKey from the latest to oldest
   dictionary: any;
   cameraSettings: CameraSettings;
 }
@@ -69,20 +71,23 @@ export const initialState: ApplicationState = {
 export const mutators = {
   async savePhoto({
     sessionKey,
-    photoUri,
+    uri,
+    isVideo,
   }: {
     sessionKey: string;
-    photoUri: string;
+    uri: string;
+    isVideo: boolean,
   }) {
     // Create new Directory to save photos
-    await FileSystem.makeDirectoryAsync(sessionKey, { intermediates: true })
+    await FileSystem.makeDirectoryAsync(DataHelper.folderPath(sessionKey), { intermediates: true })
     // Formulate filepath and copy image to file path
-    const filePath = DataHelper.folderPath(sessionKey) + '.jpg';
-    await FileSystem.copyAsync({ from: photoUri, to: filePath });
+    const ext = isVideo ? '.MOV' : '.jpg'
+    const filePath = DataHelper.folderPath(sessionKey) + ext;
+    await FileSystem.copyAsync({ from: uri, to: filePath });
 
     mutate((draft: ApplicationState) => {
       draft.history.unshift(sessionKey) // push to the front of the array
-      draft.dictionary[sessionKey] = DataHelper.createNewSession(photoUri)
+      draft.dictionary[sessionKey] = DataHelper.createNewSession(uri)
     })
   },
   saveCameraSettings({
