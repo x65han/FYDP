@@ -14,6 +14,7 @@ import { NavigationScreenProps } from 'react-navigation';
 import { Camera, Permissions, CameraObject, Video } from 'expo';
 import TimestampUtil from './services/TimestampUtil';
 import { applicationStateKey } from './Root'
+import Uploader from './services/Uploader';
 
 enum UiState {
   AskingForPermissions,
@@ -120,6 +121,9 @@ export default class CameraScreen extends React.Component<Props, State> {
       this.redoPhoto();
       return;
     }
+
+    console.log('saving photo', photoPreview)
+    await Uploader.submit(photoPreview, this.state.isVideo)
 
     try {
       await mutators.savePhoto({
