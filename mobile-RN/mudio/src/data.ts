@@ -1,5 +1,6 @@
 // @ts-ignore
 import createState from './react-copy-write';
+import Uploader from './services/Uploader'
 import { FileSystem, Camera } from 'expo';
 
 export interface AlignmentGuidePositions {
@@ -22,11 +23,11 @@ export interface CameraSettings {
 }
 
 export const DataHelper = {
-  folderPath(sessionKey: string) {
+  folderPath(sessionKey: string = '') {
     return FileSystem.documentDirectory + encodeURIComponent(sessionKey) + '/';
   },
-  createNewSession: (uri: string): Session => ({
-    photo: uri
+  createNewSession: (uri: string, isVideo: boolean): Session => ({
+    photo: uri, isVideo
   }),
   createNewCameraSettings: () => ({
     type: Camera.Constants.Type.front,
@@ -53,7 +54,8 @@ export const selectors = {
 };
 
 export interface Session {
-  photo: string
+  photo: string,
+  isVideo: boolean,
 }
 
 export interface ApplicationState {
@@ -81,13 +83,13 @@ export const mutators = {
     // Create new Directory to save photos
     await FileSystem.makeDirectoryAsync(DataHelper.folderPath(sessionKey), { intermediates: true })
     // Formulate filepath and copy image to file path
-    const ext = isVideo ? '.MOV' : '.jpg'
-    const filePath = DataHelper.folderPath(sessionKey) + ext;
+    const fileName = Uploader.get_file_name_from_path(uri)
+    const filePath = DataHelper.folderPath(sessionKey) + fileName;
     await FileSystem.copyAsync({ from: uri, to: filePath });
 
     mutate((draft: ApplicationState) => {
       draft.history.unshift(sessionKey) // push to the front of the array
-      draft.dictionary[sessionKey] = DataHelper.createNewSession(uri)
+      draft.dictionary[sessionKey] = DataHelper.createNewSession(uri, isVideo)
     })
   },
   saveCameraSettings({

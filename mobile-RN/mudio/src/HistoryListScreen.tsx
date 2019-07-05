@@ -11,26 +11,27 @@ import {
 import {
   NavigationScreenProps,
   NavigationStackScreenOptions,
-  NavigationActions,
 } from 'react-navigation';
 import { RouteConfig, RouteParams } from './Router';
 import { Consumer, ApplicationState } from './data';
-import ProjectListItem from './ProjectListItem';
+import HistoryListItem from './components/HistoryListItem';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import ColorUtil from './services/ColorUtil';
 
 const deviceWidth = Dimensions.get('window').width;
 
 interface Props extends NavigationScreenProps { }
 
-export default class ProjectListScreen extends React.Component<Props> {
+export default class HistoryListScreen extends React.Component<Props> {
   static navigationOptions = ({
     navigation,
   }: NavigationScreenProps): NavigationStackScreenOptions => ({
     title: 'Mudio',
+    headerStyle: { backgroundColor: ColorUtil.GRAY },
     headerRight: (
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate(RouteConfig.CreateProject)
+          navigation.push(RouteConfig.SettingsScreen)
         }}
         style={styles.settingsButton}
       >
@@ -39,9 +40,9 @@ export default class ProjectListScreen extends React.Component<Props> {
     ),
   });
 
-  private onPressItem = (title: string) => {
-    this.props.navigation.navigate(RouteConfig.Project, {
-      [RouteParams.ProjectName]: title,
+  private onPressItem = (sessionKey: string) => {
+    this.props.navigation.navigate(RouteConfig.PlaylistScreen, {
+      [RouteParams.sessionKey]: sessionKey,
     });
   };
 
@@ -54,25 +55,12 @@ export default class ProjectListScreen extends React.Component<Props> {
               <FlatList
                 data={state.history}
                 keyExtractor={(i: string, index) => i + index}
-                ItemSeparatorComponent={
-                  Platform.OS === 'ios'
-                    ? ({ highlighted }) => (
-                      <View
-                        style={[
-                          styles.separator,
-                          highlighted && { marginLeft: 0 },
-                        ]}
-                      />
-                    )
-                    : null
-                }
-                renderItem={({ item, separators }) => (
-                  <Text>{item}</Text>
-                  // <ProjectListItem
-                  //   onPress={this.onPressItem}
-                  //   separators={separators}
-                  //   {...item}
-                  // />
+                renderItem={({ item }) => (
+                  <HistoryListItem
+                    sessionKey={item}
+                    dictionary={state.dictionary[item]}
+                    onPress={this.onPressItem}
+                  />
                 )}
               />
             ) : (
@@ -87,23 +75,18 @@ export default class ProjectListScreen extends React.Component<Props> {
               )}
         </Consumer>
 
-        <Consumer>
-          {(state: ApplicationState) =>
-            < SafeAreaView style={styles.floatingContainer}>
-              <TouchableOpacity
-                onPress={() => {
-                  console.log(state)
-                  this.props.navigation.navigate(RouteConfig.CameraScreen)
-                }}>
-                <FontAwesome
-                  name="plus-circle"
-                  size={100}
-                  color="green"
-                />
-              </TouchableOpacity>
-            </SafeAreaView>
-          }
-        </Consumer>
+        < SafeAreaView style={styles.floatingContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('CameraStack')
+            }}>
+            <FontAwesome
+              name="plus-circle"
+              size={100}
+              color="green"
+            />
+          </TouchableOpacity>
+        </SafeAreaView>
       </View >
     );
   }
@@ -124,10 +107,11 @@ const styles = StyleSheet.create({
   },
   root: {
     flex: 1,
+    backgroundColor: ColorUtil.WHITE
   },
   separator: {
-    backgroundColor: '#999',
-    height: 1,
+    backgroundColor: ColorUtil.GRAY,
+    height: 0,
   },
   settingsButton: {
     paddingHorizontal: 10,

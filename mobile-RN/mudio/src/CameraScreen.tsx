@@ -10,11 +10,12 @@ import {
   Consumer, FlashMode,
   selectors, CameraSettings
 } from './data';
-import { NavigationScreenProps } from 'react-navigation';
+import { NavigationScreenProps, NavigationStackScreenOptions } from 'react-navigation';
 import { Camera, Permissions, CameraObject, Video } from 'expo';
 import TimestampUtil from './services/TimestampUtil';
 import { applicationStateKey } from './Root'
-import Uploader from './services/Uploader';
+import { RouteConfig } from './Router';
+import {RouteParams} from './Router';
 
 enum UiState {
   AskingForPermissions,
@@ -49,17 +50,23 @@ interface State {
   };
   cameraRolling: boolean;
   isVideo: boolean;
+  isUploading: boolean;
   sessionKey: string;
 }
 
 export default class CameraScreen extends React.Component<Props, State> {
   camera?: CameraObject;
 
+  static navigationOptions = ({ navigation }: NavigationScreenProps): NavigationStackScreenOptions => ({
+    header: null,
+  });
+
   state: State = {
     uiState: UiState.AskingForPermissions,
     preview: undefined,
     cameraRolling: false,
     isVideo: false,
+    isUploading: false,
     sessionKey: TimestampUtil.generateTimestamp()
   };
 
@@ -75,7 +82,7 @@ export default class CameraScreen extends React.Component<Props, State> {
     const rawApplicationState = await AsyncStorage.getItem(applicationStateKey)
     if (rawApplicationState) {
       const applicationState = JSON.parse(rawApplicationState)
-      this.setState({isVideo:applicationState.cameraSettings.isVideo})
+      this.setState({ isVideo: applicationState.cameraSettings.isVideo })
     }
   }
 
@@ -116,14 +123,16 @@ export default class CameraScreen extends React.Component<Props, State> {
   };
 
   private savePhoto = async () => {
+    if (this.state.isUploading === true) {
+      return
+    }
+
+    this.setState({ isUploading: true })
     const photoPreview = this.state.preview;
     if (photoPreview === undefined) {
       this.redoPhoto();
       return;
     }
-
-    console.log('saving photo', photoPreview)
-    await Uploader.submit(photoPreview, this.state.isVideo)
 
     try {
       await mutators.savePhoto({
@@ -131,12 +140,17 @@ export default class CameraScreen extends React.Component<Props, State> {
         uri: photoPreview.uri,
         isVideo: this.state.isVideo
       });
+
+      this.props.navigation.push(RouteConfig.UploadScreen, {
+        [RouteParams.sessionKey]: this.state.sessionKey,
+      })
     } catch (error) {
+      console.log('[CameraSCreen.tsx] uploading failed')
       this.redoPhoto();
       return;
+    } finally {
+      this.setState({ isUploading: false })
     }
-
-    this.props.navigation.goBack();
   };
 
   private toggleVideoSwitch = (cameraSettings: CameraSettings) => {
@@ -161,7 +175,7 @@ export default class CameraScreen extends React.Component<Props, State> {
         name="close"
         size={buttonSize}
         color="#FFF"
-        onPress={() => this.props.navigation.goBack()}
+        onPress={() => this.props.navigation.dismiss()}
       />
     );
 
