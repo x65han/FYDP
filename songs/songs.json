@@ -1,0 +1,40 @@
+{
+    "songs": [
+        {
+            "uri": "https://mudio.herokuapp.com/songs/000001.mp3",
+            "coverImage": "https://mudio.herokuapp.com/songs/000001.jpg",
+            "artist": "Rae Sremmurd",
+            "name": "Black Beattles"
+        },
+        {
+            "uri": "https://mudio.herokuapp.com/songs/000002.mp3",
+            "coverImage": "https://mudio.herokuapp.com/songs/000002.jpg",
+            "artist": "Drake",
+            "name": "Hotline Bling"
+        },
+        {
+            "uri": "https://mudio.herokuapp.com/songs/000003.mp3",
+            "coverImage": "https://mudio.herokuapp.com/songs/000003.jpg",
+            "artist": "The Weekend",
+            "name": "Starboy"
+        },
+        {
+            "uri": "https://mudio.herokuapp.com/songs/000004.mp3",
+            "coverImage": "https://mudio.herokuapp.com/songs/000004.jpg",
+            "artist": "Ed Sheeran",
+            "name": "Supermarket Flowers"
+        },
+        {
+            "uri": "https://mudio.herokuapp.com/songs/000005.mp3",
+            "coverImage": "https://mudio.herokuapp.com/songs/000005.jpg",
+            "artist": "Melanie Martinez",
+            "name": "Teddy Bear"
+        },
+        {
+            "uri": "https://mudio.herokuapp.com/songs/000006.mp3",
+            "coverImage": "https://mudio.herokuapp.com/songs/000006.jpg",
+            "artist": "Emmy Rossum",
+            "name": "Think of Me"
+        }
+    ]
+}
