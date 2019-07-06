@@ -27,7 +27,7 @@ export const DataHelper = {
     return FileSystem.documentDirectory + encodeURIComponent(sessionKey) + '/';
   },
   createNewSession: (uri: string, isVideo: boolean): Session => ({
-    photo: uri, isVideo
+    uri, isVideo
   }),
   createNewCameraSettings: () => ({
     type: Camera.Constants.Type.front,
@@ -54,7 +54,7 @@ export const selectors = {
 };
 
 export interface Session {
-  photo: string,
+  uri: string,
   isVideo: boolean,
 }
 

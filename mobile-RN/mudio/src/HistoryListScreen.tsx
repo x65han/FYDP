@@ -4,7 +4,6 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Platform,
   Dimensions,
   Text, SafeAreaView
 } from 'react-native';
@@ -58,7 +57,7 @@ export default class HistoryListScreen extends React.Component<Props> {
                 renderItem={({ item }) => (
                   <HistoryListItem
                     sessionKey={item}
-                    dictionary={state.dictionary[item]}
+                    session={state.dictionary[item]}
                     onPress={this.onPressItem}
                   />
                 )}

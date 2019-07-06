@@ -1,42 +1,53 @@
 import React from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
+  StyleSheet, View,
+  Image, Text,
   TouchableHighlight,
-  Image,
 } from 'react-native';
 import ColorUtil from '../services/ColorUtil';
 import TimestampUtil from '../services/TimestampUtil';
 import { Session } from '../data';
+import { Video } from 'expo'
 
 interface Props {
   sessionKey: string,
-  dictionary: Session,
+  session: Session,
   onPress: (title: string) => void;
 }
 
 export default class HistoryListItem extends React.Component<Props> {
   render() {
-    const {  sessionKey, dictionary } = this.props
+    const { sessionKey, session } = this.props
+    if (!session) return null
 
     return (
       <TouchableHighlight
         style={styles.root}
         underlayColor={ColorUtil.DARK_GRAY}
         onPress={() => {
-          this.props.onPress('adsf')
+          this.props.onPress(sessionKey)
         }}
       >
         <>
           <View style={styles.left}>
-            <Image
-              source={{ uri: dictionary.photo }}
-              style={styles.picture}
-            />
+            {
+              session && session.isVideo ?
+                <Video
+                  resizeMode='cover'
+                  source={{ uri: session.uri }}
+                  style={styles.picture}
+                />
+                :
+                <Image
+                  resizeMode='cover'
+                  source={{ uri: session.uri }}
+                  style={styles.picture}
+                />
+            }
           </View>
           <View style={styles.right}>
             <Text>{TimestampUtil.timeAgo(sessionKey)}</Text>
+            <Text>{session.isVideo}</Text>
           </View>
         </>
       </TouchableHighlight>
