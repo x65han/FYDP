@@ -7,12 +7,12 @@ import {
 import RecommendationService from './services/RecommendationService';
 import ColorUtil from './services/ColorUtil';
 import { RouteParams } from './Router';
-import { Session } from './data';
+import { Session, Playlist } from './data';
 
 interface Props extends NavigationScreenProps { }
 
 interface State {
-  playlist: Array<string>,
+  playlist: Array<Playlist>,
   hasPlaylist: boolean,
 }
 
@@ -28,11 +28,8 @@ export default class PlaylistScreen extends React.Component<Props, State> {
   }
 
   public async componentWillMount() {
-    console.log('....... component will mount......')
-    console.log(this.state.hasPlaylist)
     if (this.state.hasPlaylist === true) return
 
-    console.log('Getting recommendation')
     const session: Session = this.props.navigation.getParam(RouteParams.session)
     const playlist = await RecommendationService.getRecommendation(session)
 

@@ -5,16 +5,15 @@ import { SERVER_URL } from '../Root'
 
 class RecommendationService {
     public async getRecommendation(session: Session) {
-        console.log('[RecommendationService][...]', session)
         const file_name = Uploader.get_file_name_from_path(session.uri)
         const res = await axios.get(SERVER_URL + '/recommend/' + file_name)
-        const { status, data } = res
-        const playlist = data.playlist.map(name => SERVER_URL + '/songs/' + name)
+        const status = res.status
+        const playlists = res.data
 
         console.log('[RecommendationService][1/2]', status, file_name)
-        console.log('[RecommendationService][2/2]', playlist)
+        console.log('[RecommendationService][2/2]', playlists)
 
-        return playlist
+        return playlists
     }
 }
 

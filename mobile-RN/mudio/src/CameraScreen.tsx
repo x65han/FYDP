@@ -11,7 +11,9 @@ import {
   selectors, CameraSettings, DataHelper
 } from './data';
 import { NavigationScreenProps, NavigationStackScreenOptions } from 'react-navigation';
-import { Camera, Permissions, CameraObject, Video } from 'expo';
+import { Video } from 'expo';
+import * as Permissions from 'expo-permissions'
+import { Camera } from 'expo-camera'
 import TimestampUtil from './services/TimestampUtil';
 import { applicationStateKey } from './Root'
 import { RouteConfig } from './Router';
@@ -55,7 +57,7 @@ interface State {
 }
 
 export default class CameraScreen extends React.Component<Props, State> {
-  camera?: CameraObject;
+  camera?: Camera;
 
   static navigationOptions = ({ navigation }: NavigationScreenProps): NavigationStackScreenOptions => ({
     header: null,
