@@ -35,6 +35,7 @@ export default class UploadScreen extends React.Component<Props, State> {
 
   public async componentWillMount() {
     const sessionKey = this.props.navigation.getParam(RouteParams.sessionKey)
+    const session = this.props.navigation.getParam(RouteParams.session)
     const dir_arr = await FileSystem.readDirectoryAsync(DataHelper.folderPath(sessionKey))
 
     if (dir_arr.length === 0) {
@@ -62,7 +63,8 @@ export default class UploadScreen extends React.Component<Props, State> {
 
           setTimeout(() => {
             this.props.navigation.push(RouteConfig.PlaylistScreen, {
-              [RouteParams.sessionKey]: sessionKey
+              [RouteParams.sessionKey]: sessionKey,
+              [RouteParams.session]: session,
             })
           }, 1000)
         }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Platform } from 'react-native';
+import { SERVER_URL } from '../Root'
 
 class Uploader {
     private url: string = 'https://mudio.herokuapp.com'
@@ -36,13 +37,14 @@ class Uploader {
 
         const formData = new FormData();
         formData.append('file', {
+            // @ts-ignore
             uri: Platform.OS === "android" ? uri : uri.replace("file://", ""),
             type: this.get_file_type(uri),
             name: this.get_file_name_from_path(uri)
         });
 
         try {
-            const res = await axios.post(this.url + '/upload', formData, {
+            const res = await axios.post(SERVER_URL + '/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -57,7 +59,7 @@ class Uploader {
             });
 
             const { fileName, filePath } = res.data;
-            const fullPath = this.url + filePath
+            const fullPath = SERVER_URL + filePath
 
             console.log('uploaded the following', fileName, fullPath)
         } catch (err) {

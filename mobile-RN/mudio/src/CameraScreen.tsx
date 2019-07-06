@@ -8,14 +8,14 @@ import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   mutators, Session,
   Consumer, FlashMode,
-  selectors, CameraSettings
+  selectors, CameraSettings, DataHelper
 } from './data';
 import { NavigationScreenProps, NavigationStackScreenOptions } from 'react-navigation';
 import { Camera, Permissions, CameraObject, Video } from 'expo';
 import TimestampUtil from './services/TimestampUtil';
 import { applicationStateKey } from './Root'
 import { RouteConfig } from './Router';
-import {RouteParams} from './Router';
+import { RouteParams } from './Router';
 
 enum UiState {
   AskingForPermissions,
@@ -141,8 +141,11 @@ export default class CameraScreen extends React.Component<Props, State> {
         isVideo: this.state.isVideo
       });
 
+      const session: Session = DataHelper.createNewSession(photoPreview.uri, this.state.isVideo)
+
       this.props.navigation.push(RouteConfig.UploadScreen, {
         [RouteParams.sessionKey]: this.state.sessionKey,
+        [RouteParams.session]: session,
       })
     } catch (error) {
       console.log('[CameraSCreen.tsx] uploading failed')
@@ -285,17 +288,6 @@ export default class CameraScreen extends React.Component<Props, State> {
                           </TouchableOpacity>
 
                           <Switch
-                            onPress={() => {
-                              this.saveCameraSettings({
-                                ...cameraSettings,
-                                type:
-                                  cameraSettings.type === Camera.Constants.Type.back
-                                    ? Camera.Constants.Type.front
-                                    : Camera.Constants.Type.back,
-                              });
-                            }}
-
-
                             onValueChange={() => {
                               this.toggleVideoSwitch(cameraSettings)
                             }}

@@ -14,7 +14,8 @@ export enum RouteConfig {
 }
 
 export enum RouteParams {
-  sessionKey = 'sessionKey'
+  sessionKey = 'sessionKey',
+  session = 'session',
 }
 
 export default createStackNavigator(

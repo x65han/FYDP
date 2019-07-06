@@ -12,7 +12,7 @@ import { Video } from 'expo'
 interface Props {
   sessionKey: string,
   session: Session,
-  onPress: (title: string) => void;
+  onPress: (sessionKey: string, session:Session) => void;
 }
 
 export default class HistoryListItem extends React.Component<Props> {
@@ -25,7 +25,7 @@ export default class HistoryListItem extends React.Component<Props> {
         style={styles.root}
         underlayColor={ColorUtil.DARK_GRAY}
         onPress={() => {
-          this.props.onPress(sessionKey)
+          this.props.onPress(sessionKey, session)
         }}
       >
         <>
@@ -47,7 +47,7 @@ export default class HistoryListItem extends React.Component<Props> {
           </View>
           <View style={styles.right}>
             <Text>{TimestampUtil.timeAgo(sessionKey)}</Text>
-            <Text>{session.isVideo}</Text>
+            <Text>{session.isVideo ? 'Video' : 'Photo'}</Text>
           </View>
         </>
       </TouchableHighlight>

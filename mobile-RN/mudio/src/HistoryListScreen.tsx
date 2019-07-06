@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  FlatList,
+  StyleSheet, View,
+  FlatList, Dimensions,
   TouchableOpacity,
-  Dimensions,
   Text, SafeAreaView
 } from 'react-native';
 import {
@@ -12,7 +10,7 @@ import {
   NavigationStackScreenOptions,
 } from 'react-navigation';
 import { RouteConfig, RouteParams } from './Router';
-import { Consumer, ApplicationState } from './data';
+import { Consumer, ApplicationState,Session } from './data';
 import HistoryListItem from './components/HistoryListItem';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import ColorUtil from './services/ColorUtil';
@@ -39,9 +37,10 @@ export default class HistoryListScreen extends React.Component<Props> {
     ),
   });
 
-  private onPressItem = (sessionKey: string) => {
+  private onPressItem = (sessionKey: string, session:Session) => {
     this.props.navigation.navigate(RouteConfig.PlaylistScreen, {
       [RouteParams.sessionKey]: sessionKey,
+      [RouteParams.session]: session,
     });
   };
 
@@ -99,7 +98,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     left: deviceWidth / 2 - 50,
     position: 'absolute',
-    // shadowOffset: { width: 10, height: 10, },
     shadowColor: 'gray',
     shadowOpacity: 1.0,
     shadowRadius: 40

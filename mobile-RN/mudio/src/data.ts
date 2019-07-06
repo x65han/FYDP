@@ -53,6 +53,13 @@ export const selectors = {
   // cameraSettings: createSelector((state: ApplicationState) => state.cameraSettings),
 };
 
+export interface Playlist {
+  uri: string,
+  coverImage: string,
+  artist: string,
+  name: string,
+}
+
 export interface Session {
   uri: string,
   isVideo: boolean,
