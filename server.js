@@ -6,6 +6,7 @@ app.use(fileUpload())
 
 app.use('/', express.static('build'))
 app.use('/uploads', express.static('uploads'))
+app.use('/songs', express.static('songs'))
 app.use('/upload', require('./controllers/upload_controller'))
 app.use('/recommend', require('./controllers/recommend_controller'))
 
