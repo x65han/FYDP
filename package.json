@@ -21,6 +21,8 @@
     "axois": "^1.0.0",
     "concurrently": "^4.1.0",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.4"
+    "express-fileupload": "^1.1.4",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "get-video-duration": "^1.0.3"
   }
 }
