@@ -1,7 +1,6 @@
 import os
 import subprocess
 import tarfile
-import requests
 
 def get_all_files_from_dir(directory):
 
@@ -45,31 +44,3 @@ def get_all_filenames_from_tar(tar_fn):
 	'''
 	with tarfile.open(tar_fn) as f:
 		return [m.name for m in f.getmembers() if m.isfile()]
-
-
-def save_pickle(obj, fn):
-	'''
-	# Functionality
-		Save the data into pickle format
-	# Arguments
-		obj: the data object
-		fn: the pickle file name
-	# Returns
-		Nothing. Just save to the file.
-	'''
-	with open(fn, "wb") as f:
-		pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-
-
-def read_pickle(fn):
-
-	'''
-	# Functionality
-		Save the data into pickle format
-	# Arguments
-		fn: the pickle file name
-	# Returns
-		obj: the desired data object
-	'''
-	with open(fn, "rb") as f:
-		return pickle.load(f)
