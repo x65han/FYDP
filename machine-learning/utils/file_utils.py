@@ -1,12 +1,13 @@
 import os
 import subprocess
 import tarfile
-
+import requests
 
 def get_all_files_from_dir(directory):
-	'''
-	# Functionality
-		Get the whole list of files in a folder
+
+    '''
+    # Functionality
+    Get the whole list of files in a folder
 	# Arguments
 		directory: string.  (e.g.,Users/laowang/~vgg/data/flowers/102/102flowers.tgz)
 	# Returns
@@ -16,19 +17,6 @@ def get_all_files_from_dir(directory):
     for root, dirs, files in os.walk(directory):
         file_paths += [os.path.join(root, x) for x in files]
     return file_paths
-
-
-def download_files(url):
-	'''
-	# Functionality
-		Download web files to the current folder
-	# Arguments
-		url: string. The url of the web file to download. (e.g., http://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz)
-	# Returns
-		None
-	'''
-	pipe = subprocess.Popen(["wget", url])
-	pipe.communicate()
 
 
 def read_raw_from_tar(tar_fn, fn):
@@ -57,3 +45,31 @@ def get_all_filenames_from_tar(tar_fn):
 	'''
 	with tarfile.open(tar_fn) as f:
 		return [m.name for m in f.getmembers() if m.isfile()]
+
+
+def save_pickle(obj, fn):
+	'''
+	# Functionality
+		Save the data into pickle format
+	# Arguments
+		obj: the data object
+		fn: the pickle file name
+	# Returns
+		Nothing. Just save to the file.
+	'''
+	with open(fn, "wb") as f:
+		pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def read_pickle(fn):
+
+	'''
+	# Functionality
+		Save the data into pickle format
+	# Arguments
+		fn: the pickle file name
+	# Returns
+		obj: the desired data object
+	'''
+	with open(fn, "rb") as f:
+		return pickle.load(f)

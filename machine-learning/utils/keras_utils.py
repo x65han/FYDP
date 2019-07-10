@@ -6,7 +6,7 @@ from keras.models import save_model
 import tensorflow as tf
 import keras
 from keras import backend as K
-import tqdm_utils
+from .tqdm_utils import tqdm_notebook_failsafe
 
 
 class TqdmProgressCallback(keras.callbacks.Callback):
@@ -22,7 +22,7 @@ class TqdmProgressCallback(keras.callbacks.Callback):
         else:
             self.use_steps = False
             self.target = self.params['samples']
-        self.prog_bar = tqdm_utils.tqdm_notebook_failsafe(total=self.target)
+        self.prog_bar = tqdm_notebook_failsafe(total=self.target)
         self.log_values_by_metric = defaultdict(list)
 
     def _set_prog_bar_desc(self, logs):
