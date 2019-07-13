@@ -1,7 +1,7 @@
 # Mudio Image Captioning Pipeline
 
 ### Motivation
-The overallobjective of Mudio is to extract the semantics and emotions from short videos and pass them to the user in the form of music and melody. 
+The overall objective of Mudio is to extract the semantics and emotions from short videos and pass them to the user in the form of music and melody. 
 With Mudio, the visually impaired will be able to admire the scenery in front of them instead of simply detecting where the objects are. 
 Mudio provides a chance for the visually impaired to perceive the world comprehensively, which might potentially reduce the likelihood of mental illness due to the loss of sight.
 
