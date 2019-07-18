@@ -11,7 +11,6 @@ import os
 import tensorflow as tf
 from tensorflow.contrib import keras
 import numpy as np
-%matplotlib inline
 import matplotlib.pyplot as plt
 L = keras.layers
 K = keras.backend
@@ -29,7 +28,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-with open('vocab.json', 'r') as fp:
+with open('./ml-prod/vocab.json', 'r') as fp:
     vocab = json.load(fp)
 model = Model(config=config, vocab=vocab, input_data=None, pad_idx=vocab["#PAD#"], checkpoint_epoch=49)
-model.inference(cv2.imread("boats-2758962__340.jpg"))
+model.inference(cv2.imread("./ml-prod/boats-2758962__340.jpg"), plot=False)

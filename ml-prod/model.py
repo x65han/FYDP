@@ -290,7 +290,8 @@ class Model(object):
         self.build_train_decoder()
 
         # Load the model. Can specify which model later
-        checkpoint_path = '/content/gdrive/My Drive/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
+        # checkpoint_path = '/content/gdrive/My Drive/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
+        checkpoint_path = "./ml-prod/weights_" + str(self.checkpoint_epoch)
         saver = tf.train.Saver()
         saver.restore(self.s, checkpoint_path)
 
@@ -306,7 +307,7 @@ class Model(object):
             plt.show()
 
         img = self.preprocess(img)
-        print(' '.join(self.generate_caption(img)[1:-1]))
+        print('>>', ' '.join(self.generate_caption(img)[1:-1]))
 
 
     def train(self):

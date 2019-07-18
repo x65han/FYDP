@@ -4,6 +4,7 @@ const fs = require('fs')
 const Catalog = JSON.parse(fs.readFileSync('./songs/songs.json', 'utf8'));
 const extractFrames = require('ffmpeg-extract-frames')
 const { getVideoDurationInSeconds } = require('get-video-duration')
+const exec = require("child_process").execSync;
 
 // export interface Playlist {
 //     uri: string,
@@ -37,9 +38,22 @@ router.get('/:file_path', async (req, res) => {
     const file_exists = await (validate_media_path(req.params.file_path))
     console.log('[Recommendation][file_path][exists]', req.params.file_path, file_exists)
 
-
     const playlist = []
     const tabu = new Set()
+
+    console.log('.....Waiting for Deep Leanring Model to finish.....')
+    var image2text = exec("python ml-prod/image2text.py");
+    image2text = image2text.toString('utf8')
+    image2text = image2text.split('\n')
+    result = ''
+
+    for (let line of image2text) {
+        if (line.startsWith(">> ")) {
+            result = line.slice(3)
+        }
+    }
+
+    console.log(result)
 
     i = 0
     while (tabu.size < 3) {
