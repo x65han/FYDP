@@ -16,13 +16,7 @@ To facilitate the convenience of Research and Development in this pipeline, 3 no
 3. **Train and Inference OOP** :  We can also wrap all the model-related operations in a simple class, just as keras.applications. This setting will make non-ML team members to R&D more quickly without considering too much details.
 
 ### Research & Development contributors: 
-Yuanxin(Michael) Wang
-
-Undergraduate Research Assistant @ [UWaterloo NLP Lab](https://ov-research.uwaterloo.ca/NLP_lab.html)
-
-[Follow on Github](https://github.com/MichaelYxWang)
-
-[Connect on Linkedin](https://www.linkedin.com/in/michael-yuanxin-wang/)
+[Yuanxin(Michael) Wang](https://www.linkedin.com/in/michael-yuanxin-wang/)
 
 
 ### References
