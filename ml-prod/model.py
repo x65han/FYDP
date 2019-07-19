@@ -307,7 +307,9 @@ class Model(object):
             plt.show()
 
         img = self.preprocess(img)
-        print('>>', ' '.join(self.generate_caption(img)[1:-1]))
+        res = ' '.join(self.generate_caption(img)[1:-1])
+        print('>>', res)
+        return res
 
 
     def train(self):

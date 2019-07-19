@@ -5,6 +5,7 @@ const Catalog = JSON.parse(fs.readFileSync('./songs/songs.json', 'utf8'));
 const extractFrames = require('ffmpeg-extract-frames')
 const { getVideoDurationInSeconds } = require('get-video-duration')
 const exec = require("child_process").execSync;
+const net = require('net');
 
 // export interface Playlist {
 //     uri: string,
@@ -34,6 +35,7 @@ async function extract_frames(file_name) {
     })
 }
 
+SOCKET_BUSY = false
 router.get('/:file_path', async (req, res) => {
     const file_exists = await (validate_media_path(req.params.file_path))
     console.log('[Recommendation][file_path][exists]', req.params.file_path, file_exists)
@@ -42,18 +44,32 @@ router.get('/:file_path', async (req, res) => {
     const tabu = new Set()
 
     console.log('.....Waiting for Deep Leanring Model to finish.....')
-    var image2text = exec("python ml-prod/image2text.py");
-    image2text = image2text.toString('utf8')
-    image2text = image2text.split('\n')
-    result = ''
-
-    for (let line of image2text) {
-        if (line.startsWith(">> ")) {
-            result = line.slice(3)
-        }
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    if (SOCKET_BUSY === true) {
+        res.status(503)
+        return
     }
 
-    console.log(result)
+    const client = new net.Socket();
+
+    client.connect(65432, '127.0.0.1', function() {
+        console.log('Calling YuanxinModel');
+        SOCKET_BUSY = true
+        client.write('path to image')
+    });
+
+    client.on('data', function(data) {
+        console.log('Received: ' + data);
+        client.destroy(); // kill client after server's response
+        SOCKET_BUSY = false
+    });
+
+    client.on('close', function() {
+        console.log('Disconnected from YuxanxinModel');
+        SOCKET_BUSY = false
+    });
 
     i = 0
     while (tabu.size < 3) {
