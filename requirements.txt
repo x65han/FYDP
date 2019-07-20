@@ -1,0 +1,6 @@
+Flask==1.1.1
+opencv-python==4.1.0.25
+Flask-RESTful==0.3.7
+flask-marshmallow==0.10.1
+Flask-SQLAlchemy==2.4.0
+marshmallow-sqlalchemy==0.17.0
