@@ -12,7 +12,6 @@ import collections, pickle, socket
 import tensorflow as tf
 from tensorflow.contrib import keras
 import numpy as np
-import matplotlib.pyplot as plt
 L = keras.layers
 K = keras.backend
 from collections import defaultdict

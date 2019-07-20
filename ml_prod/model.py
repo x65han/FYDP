@@ -12,7 +12,6 @@ L = keras.layers
 K = keras.backend
 import random
 import pickle
-import matplotlib.pyplot as plt
 
 class Model(object):
 
@@ -299,12 +298,6 @@ class Model(object):
 
         # Actual Inference Starts
         print('[INFO] Inference process started')
-        if plot:
-            fig = plt.figure(figsize=(10, 10))
-            plt.grid('off')
-            plt.axis('off')
-            plt.imshow(img)
-            plt.show()
 
         img = self.preprocess(img)
         res = ' '.join(self.generate_caption(img)[1:-1])

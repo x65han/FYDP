@@ -8,7 +8,7 @@ export const applicationStateKey = 'ApplicationState';
 const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null;
 
 // export const SERVER_URL = 'http://localhost:5000';
-export const SERVER_URL = 'http://mudio.us-east-2.elasticbeanstalk.com';
+export const SERVER_URL = 'http://mudio-env.gupxzmayfu.us-east-2.elasticbeanstalk.com';
 // export const SERVER_URL = 'https://mudio.herokuapp.com';
 
 export default class Root extends React.Component {
