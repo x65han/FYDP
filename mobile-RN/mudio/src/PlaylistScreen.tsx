@@ -60,7 +60,7 @@ class Player extends React.Component {
       this.playbackInstance = null;
     }
 
-    const source = { uri: this.props.myPlaylist[this.index].url };
+    const source = { uri: this.props.myPlaylist[this.index].uri };
     const initialStatus = {
       shouldPlay: playing,
       volume: this.state.volume,
@@ -275,7 +275,7 @@ class Player extends React.Component {
   render() {
     let data = this.props.myPlaylist[this.index]
     return (
-      data.url ?
+      data ?
         <View style={styles.container}>
           {this.renderPlayer()}
         </View> : <View/>
@@ -298,9 +298,9 @@ export default class PlaylistScreen extends React.Component<Props, State> {
     if (this.state.hasPlaylist === true) return
 
     const session: Session = this.props.navigation.getParam(RouteParams.session)
-    //const playlist = await RecommendationService.getRecommendation(session)
-    const mockData = require('./musicList.json')
-    const playlist = mockData.songs
+    const playlist = await RecommendationService.getRecommendation(session)
+    //const mockData = require('./musicList.json')
+    //const playlist = mockData.songs
 
     this.setState({ playlist, hasPlaylist: true })
   }
