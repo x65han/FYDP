@@ -1,0 +1,19 @@
+{
+  "songs":[
+    {
+      "name": "Black Beattles",
+      "cover": "http://img.yidianling.com/file/2016/07/inu911sfu2qf1jwe.jpg!s330x330",
+      "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    },
+    {
+      "name": "Hotline Bling",
+      "cover": "http://img.yidianling.com/file/2016/07/kqy3nolw2e7xoupi.jpg!s330x330",
+      "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    },
+    {
+      "name": "Supermarket Flowers",
+      "cover": "http://img.yidianling.com/file/2016/07/y7g53dx25685z6it.jpg!s330x330",
+      "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    }
+  ]
+}
