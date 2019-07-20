@@ -3,8 +3,6 @@ import { Platform } from 'react-native';
 import { SERVER_URL } from '../Root'
 
 class Uploader {
-    private url: string = 'https://mudio.herokuapp.com'
-
     get_file_name_from_path(uri: string) {
         const tokens = uri.split('/')
         return tokens[tokens.length - 1]

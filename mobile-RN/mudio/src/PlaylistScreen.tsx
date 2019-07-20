@@ -8,6 +8,7 @@ import RecommendationService from './services/RecommendationService';
 import ColorUtil from './services/ColorUtil';
 import { RouteParams } from './Router';
 import { Session, Playlist } from './data';
+import { Audio } from 'expo-av';
 
 interface Props extends NavigationScreenProps { }
 
@@ -34,6 +35,12 @@ export default class PlaylistScreen extends React.Component<Props, State> {
     const playlist = await RecommendationService.getRecommendation(session)
 
     this.setState({ playlist, hasPlaylist: true })
+    const soundObject = new Audio.Sound();
+    console.log('1 ////// 3')
+    await soundObject.loadAsync({uri:'https://github.com/y276lin/FYDP-static-assets/blob/master/000002.mp3?raw=true'});
+    console.log('2 ////// 3')
+    await soundObject.playAsync();
+    console.log('3 ////// 3')
   }
 
   render() {
