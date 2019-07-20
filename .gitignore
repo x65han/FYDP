@@ -1,3 +1,5 @@
 **.DS_Store
+deploy
+deploy.zip
 node_modules/
 __pycache__/
