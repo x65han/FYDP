@@ -66,7 +66,7 @@ class Player extends React.Component {
       volume: this.state.volume,
     };
 
-    const { sound, status } = await Audio.Sound.create(
+    const { sound, status } = await Audio.Sound.createAsync(
       source,
       initialStatus,
       this.onPlaybackStatusUpdate
@@ -301,7 +301,6 @@ export default class PlaylistScreen extends React.Component<Props, State> {
     //const playlist = await RecommendationService.getRecommendation(session)
     const mockData = require('./musicList.json')
     const playlist = mockData.songs
-    //const soundObject = new Audio.Sound()
 
     this.setState({ playlist, hasPlaylist: true })
   }
