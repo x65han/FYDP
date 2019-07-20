@@ -299,8 +299,6 @@ export default class PlaylistScreen extends React.Component<Props, State> {
 
     const session: Session = this.props.navigation.getParam(RouteParams.session)
     const playlist = await RecommendationService.getRecommendation(session)
-    //const mockData = require('./musicList.json')
-    //const playlist = mockData.songs
 
     this.setState({ playlist, hasPlaylist: true })
   }
