@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
+import imageio
+imageio.plugins.ffmpeg.download()
 from moviepy.editor import VideoFileClip
-import os, random, json
-
+import os, random, json, cv2
+from ml_prod.image2text import model
 recommend_controller = Blueprint('recommend_controller', __name__)
 
 # load songs.json
@@ -10,18 +12,15 @@ with open('./songs/songs.json', 'r') as f:
 
 
 def validate_media_path(path):
-    path = os.path.join('./uploads', path)
     return os.path.isfile(path)
 
 
 def get_video_duration(path):
-    path = os.path.join('./uploads', path)
     duration = VideoFileClip(path).duration
     return duration
 
 
 def extract_frames(movie_path, times, duration=0):
-    movie_path = os.path.join('./uploads', movie_path)
     clip = VideoFileClip(movie_path)
     for t in times:
         if t > duration: break
@@ -31,7 +30,8 @@ def extract_frames(movie_path, times, duration=0):
 
 @recommend_controller.route('/<string:file_path>')
 def show(file_path):
-    file_exists = validate_media_path(file_path)
+    full_path = os.path.join('uploads', file_path)
+    file_exists = validate_media_path(full_path)
     print('[Recommend][file_path][exists]', file_path, file_exists)
 
     if file_exists is False:
@@ -43,7 +43,7 @@ def show(file_path):
 
     # Extract Frames from Video
     if file_path[-4:] in {'.mov'}:
-        duration = get_video_duration(file_path)
+        duration = get_video_duration(full_path)
 
         times = []
         time = 0
@@ -51,7 +51,10 @@ def show(file_path):
             times.append(time)
             time += 0.5
 
-        extract_frames(file_path, times, duration)
+        extract_frames(full_path, times, duration)
+
+    # Image2Text
+    image2text = model.inference(cv2.imread(full_path), plot=False)
 
     # Generate Random Recommendation
     playlist = []
@@ -63,4 +66,9 @@ def show(file_path):
             tabu.add(i)
         i = (i + 1) % len(Catalog['songs'])
 
-    return jsonify(playlist)
+    print(request.base_url)
+    return jsonify({
+        'playlist': playlist,
+        'image2text': image2text,
+        'img_url': request.base_url.replace('/recommend/', '/uploads/')
+    })

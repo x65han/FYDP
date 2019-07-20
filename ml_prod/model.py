@@ -1,8 +1,8 @@
-from utils.file_utils import *
-from utils.image_utils import *
-from utils.generator_utils import *
-from utils.tqdm_utils import *
-from utils.keras_utils import *
+from ml_prod.utils.file_utils import *
+from ml_prod.utils.image_utils import *
+from ml_prod.utils.generator_utils import *
+from ml_prod.utils.tqdm_utils import *
+from ml_prod.utils.keras_utils import *
 
 import os
 import tensorflow as tf
@@ -291,7 +291,7 @@ class Model(object):
 
         # Load the model. Can specify which model later
         # checkpoint_path = '/content/gdrive/My Drive/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
-        checkpoint_path = "./ml-prod/weights_" + str(self.checkpoint_epoch)
+        checkpoint_path = "./ml_prod/weights_" + str(self.checkpoint_epoch)
         saver = tf.train.Saver()
         saver.restore(self.s, checkpoint_path)
 
