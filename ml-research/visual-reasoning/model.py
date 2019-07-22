@@ -35,8 +35,8 @@ class Model(object):
         self.vocab = vocab
         self.checkpoint_epoch = checkpoint_epoch
         self.learning_rate = 0.001
-
-        self.train_img_embeds, self.train_captions_indexed, self.val_img_embeds, self.val_captions_indexed = input_data
+        if input_data:
+            self.train_img_embeds, self.train_captions_indexed, self.val_img_embeds, self.val_captions_indexed = input_data
 
 
     def init_placeholders(self):
