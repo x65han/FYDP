@@ -37,7 +37,6 @@ router.get('/:file_path', async (req, res) => {
     const file_exists = await (validate_media_path(req.params.file_path))
     console.log('[Recommendation][file_path][exists]', req.params.file_path, file_exists)
 
-
     const playlist = []
     const tabu = new Set()
 
