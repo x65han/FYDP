@@ -1,11 +1,11 @@
 # Mudio Image Captioning Pipeline
 
 ### Motivation
-The overall objective of Mudio is to extract the semantics and emotions from short videos and pass them to the user in the form of music and melody. 
-With Mudio, the visually impaired will be able to admire the scenery in front of them instead of simply detecting where the objects are. 
+The overall objective of Mudio is to extract the semantics and emotions from short videos and pass them to the user in the form of music and melody.
+With Mudio, the visually impaired will be able to admire the scenery in front of them instead of simply detecting where the objects are.
 Mudio provides a chance for the visually impaired to perceive the world comprehensively, which might potentially reduce the likelihood of mental illness due to the loss of sight.
 
-This pipeline is the first Deep Learning component of this project, which aims to generate reasonable text description for the 
+This pipeline is the first Deep Learning component of this project, which aims to generate reasonable text description for the
 input images.
 
 ### Our R&D Interface
@@ -14,8 +14,9 @@ To facilitate the convenience of Research and Development in this pipeline, 3 no
 2. **Update Embeddings** :  First get the downloaded data. Then generate New image embeddings and store in google drive in a pickle format. Again, We should gradually adding more data
 3. **Train and Inference Notebook** :  We can set up the encoder-decoder architecture, train and forward pass in the notebook cells.
 3. **Train and Inference OOP** :  We can also wrap all the model-related operations in a simple class, just as keras.applications. This setting will make non-ML team members to R&D more quickly without considering too much details.
+4. **Inference** :  Take 1,000 images from photographer [Constantine Cheng](https://www.instagram.com/cons.i.jhc/), which are not in either train, val and test set. Then use our algorithm to inference on these images. Results are quite promising.
 
-### Research & Development contributors: 
+### Research & Development contributors:
 [Yuanxin(Michael) Wang](https://www.linkedin.com/in/michael-yuanxin-wang/)
 
 
