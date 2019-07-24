@@ -297,7 +297,6 @@ class Model(object):
         self.build_inference_decoder()
 
         # Actual Inference Starts
-        print('[INFO] Inference process started')
         if plot:
             fig = plt.figure(figsize=(10, 10))
             plt.grid('off')
@@ -320,7 +319,6 @@ class Model(object):
         self.optimize()
 
         # Actual Training Starts
-        print('[INFO] Training process started')
         self.s.run(tf.global_variables_initializer())
         saver = tf.train.Saver()
 
