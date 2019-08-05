@@ -7,6 +7,12 @@ router.get('/list', (req, res) => {
     return res.status(200).send(files)
 })
 
+router.get('/rm/:path', (req, res) => {
+    fs.unlink('uploads/' + req.params.path)
+    const files = fs.readdirSync("./uploads")
+    return res.status(200).send(files)
+})
+
 router.post('/', (req, res) => {
     if (req.files === null) {
         return res.status(400).json({ msg: 'No file was uploaded' })

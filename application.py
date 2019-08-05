@@ -10,6 +10,11 @@ application = app = Flask(__name__)
 def send_uploaded_files(path):
     return send_from_directory('uploads', path)
 
+@app.route('/uploads/rm/<path:path>')
+def remove_uploaded_files(path):
+    os.remove(os.path.join('uploads', path))
+    return ('', 200)
+
 # BluePrint Routes
 app.register_blueprint(recommend_controller, url_prefix='/recommend')
 app.register_blueprint(upload_controller, url_prefix='/upload')
