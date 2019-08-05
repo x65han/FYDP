@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request, send_file, render_template
+import imageio
+imageio.plugins.ffmpeg.download()
 from moviepy.editor import VideoFileClip
 import os, random, json, cv2
 from ml_prod.image2text import model
@@ -59,7 +61,10 @@ def recommend_given_file(file_path):
         extracted_frames_path = extract_frames(full_path, times, duration)
 
     # Image2Text
-    image2text = model.inference(cv2.imread(extracted_frames_path[0]), plot=False)
+    print('Started [model].[inference]', full_path)
+    # image2text = model.inference(cv2.imread(full_path), plot=False)
+    image2text = 'tbd'
+    print('Done [model].[inference]', image2text)
 
     # Generate Random Recommendation
     playlist = []
