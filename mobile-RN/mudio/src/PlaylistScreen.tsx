@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Slider, Platform } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, Slider, Platform } from 'react-native';
 import {
   NavigationScreenProps,
   NavigationStackScreenOptions,
@@ -216,6 +216,45 @@ class Player extends React.Component {
     return '';
   }
 
+  onMusicPressed(songIndex) {
+    if (this.playbackInstance != null) {
+      console.log(songIndex);
+      this.index = songIndex;
+      this.updatePlaybackInstanceForIndex(this.state.shouldPlay);
+    }
+  }
+
+  private generateMusicList = () => {
+    let list = []
+
+    for (let i = 0; i < this.props.myPlaylist.length; i++) {
+      let song = this.props.myPlaylist[i];
+      list.push(
+        <TouchableHighlight
+          key={i}
+          underlayColor={ColorUtil.DARK_GRAY}
+          onPress={this.onMusicPressed.bind(this, i)}
+          disabled={this.state.isLoading}
+          >
+          <>
+          <View style={styles.left}>
+            <Image
+              resizeMode='cover'
+              source={{ uri: song.coverImage }}
+              style={styles.picture}
+            />
+          </View>
+          <View style={styles.right}>
+            <Text>{song.name}</Text>
+            <Text>{song.artist}</Text>
+          </View>
+          </>
+        </TouchableHighlight>
+      )
+    }
+    return list
+  }
+
   private renderPlayer = () => {
     return (
       <View style={styles.bgContainer}>
@@ -244,7 +283,7 @@ class Player extends React.Component {
                 onPress={this.onBackPressed}
                 disabled={this.state.isLoading}
               >
-                <AntDesign name={'stepbackward'} size={35} color="#000"/>
+                <AntDesign name={'stepbackward'} size={25} color="#000"/>
               </TouchableHighlight>
               <TouchableHighlight
                 style={{width: 35, height: 35, borderRadius: 20, borderWidth: 1, borderColor: ColorUtil.BLACK, justifyContent: 'center', alignItems: 'center'}}
@@ -275,10 +314,12 @@ class Player extends React.Component {
   render() {
     let data = this.props.myPlaylist[this.index]
     return (
-      data ?
-        <View style={styles.container}>
-          {this.renderPlayer()}
-        </View> : <View/>
+      <View style={styles.container}>
+        {this.generateMusicList()}
+        {
+          data ? this.renderPlayer() : null
+        }
+      </View>
     )
   }
 }
@@ -307,13 +348,15 @@ export default class PlaylistScreen extends React.Component<Props, State> {
     return (
       <View style={styles.root}>
         <Text>Playlist page {this.props.navigation.getParam(RouteParams.sessionKey)}</Text>
-        <Text>{JSON.stringify(this.state.playlist)}</Text>
+        {/* <View>{this.generateMusicList()}</View> */}
         <Player myPlaylist={this.state.playlist}/>
       </View >
     );
   }
 }
 
+const paddingSize = 15
+const imgSize = 50
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -358,5 +401,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
+  },
+  left: {
+    padding: paddingSize,
+  },
+  right: {
+    paddingLeft: 0,
+    paddingRight: paddingSize,
+    paddingTop: paddingSize,
+    paddingBottom: paddingSize,
+    borderBottomWidth: 1,
+    borderColor: ColorUtil.GRAY,
+    // flex: 1,
+  },
+  picture: {
+    borderRadius: 4,
+    width: imgSize,
+    height: imgSize,
   }
 });
