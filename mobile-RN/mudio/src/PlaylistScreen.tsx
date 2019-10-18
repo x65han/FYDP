@@ -347,7 +347,7 @@ export default class PlaylistScreen extends React.Component<Props, State> {
   render() {
     return (
       <View style={styles.root}>
-        <Text>Playlist page {this.props.navigation.getParam(RouteParams.sessionKey)}</Text>
+        {/* <Text>Playlist page {this.props.navigation.getParam(RouteParams.sessionKey)}</Text> */}
         {/* <View>{this.generateMusicList()}</View> */}
         <Player myPlaylist={this.state.playlist}/>
       </View >
