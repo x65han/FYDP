@@ -1,3 +1,10 @@
 **.DS_Store
+deploy
+deploy.zip
 node_modules/
 __pycache__/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

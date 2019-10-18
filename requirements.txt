@@ -1,6 +1,13 @@
 Flask==1.1.1
+matplotlib==2.2.3
 opencv-python==4.1.0.25
 Flask-RESTful==0.3.7
 flask-marshmallow==0.10.1
 Flask-SQLAlchemy==2.4.0
 marshmallow-sqlalchemy==0.17.0
+imageio==2.4.1
+imageio-ffmpeg==0.3.0
+ffmpeg-python==0.2.0
+moviepy==1.0.0
+Keras==2.2.4
+tensorflow==1.13.1
