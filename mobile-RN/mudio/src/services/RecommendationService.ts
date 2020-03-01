@@ -29,6 +29,42 @@ class RecommendationService {
               coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.jpg?raw=true",
               name: "Supermarket Flowers",
               uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.mp3?raw=true"
+            },
+            {
+              artist: "Rae Sremmurd",
+              coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000001.jpg?raw=true",
+              name: "Black Beattles",
+              uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000001.mp3?raw=true"
+            },
+            {
+              artist: "The Weekend",
+              coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000003.jpg?raw=true",
+              name: "Starboy",
+              uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000003.mp3?raw=true"
+            },
+            {
+              artist: "Ed Sheeran",
+              coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.jpg?raw=true",
+              name: "Supermarket Flowers",
+              uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.mp3?raw=true"
+            },
+            {
+              artist: "Rae Sremmurd",
+              coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000001.jpg?raw=true",
+              name: "Black Beattles",
+              uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000001.mp3?raw=true"
+            },
+            {
+              artist: "The Weekend",
+              coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000003.jpg?raw=true",
+              name: "Starboy",
+              uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000003.mp3?raw=true"
+            },
+            {
+              artist: "Ed Sheeran",
+              coverImage: "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.jpg?raw=true",
+              name: "Supermarket Flowers",
+              uri: "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.mp3?raw=true"
             }
           ]
         }

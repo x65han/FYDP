@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableHighlight, Slider, Platform } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, Slider, Platform, ScrollView } from 'react-native';
 import {
   NavigationScreenProps,
   NavigationStackScreenOptions,
@@ -87,7 +87,7 @@ class Player extends React.Component {
     } else {
       this.setState({
         playbackInstanceName: this.props.myPlaylist[this.index].name,
-        isLoading: false,
+        isLoading: false
       });
     }
   }
@@ -236,19 +236,19 @@ class Player extends React.Component {
           onPress={this.onMusicPressed.bind(this, i)}
           disabled={this.state.isLoading}
           >
-          <>
-          <View style={styles.left}>
-            <Image
-              resizeMode='cover'
-              source={{ uri: song.coverImage }}
-              style={styles.picture}
-            />
+          <View style={styles.songItem}>
+            <View style={styles.left}>
+              <Image
+                resizeMode='cover'
+                source={{ uri: song.coverImage }}
+                style={styles.picture}
+              />
+            </View>
+            <View style={styles.right}>
+              <Text>Name: {song.name}</Text>
+              <Text>Artist: {song.artist}</Text>
+            </View>
           </View>
-          <View style={styles.right}>
-            <Text>{song.name}</Text>
-            <Text>{song.artist}</Text>
-          </View>
-          </>
         </TouchableHighlight>
       )
     }
@@ -259,9 +259,12 @@ class Player extends React.Component {
     return (
       <View style={styles.bgContainer}>
         <View style={{flex: 1}}>
-          <View style={{alignItems: 'center'}}>
-            <Text style={styles.title}>{this.state.playbackInstanceName}</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Playing: {this.state.playbackInstanceName}</Text>
           </View>
+          <ScrollView style={styles.songsContainer}>
+            {this.generateMusicList()}
+          </ScrollView>
           <View style={styles.progressStyle}>
             <Text style={{width: 35, fontSize: 11, color: ColorUtil.BLACK, marginLeft: 5}}>{this.getTimestamp()}</Text>
             <Slider
@@ -312,12 +315,12 @@ class Player extends React.Component {
   }
 
   render() {
+    let songsList = this.props.myPlaylist
     let data = this.props.myPlaylist[this.index]
     return (
       <View style={styles.container}>
-        {this.generateMusicList()}
         {
-          data ? this.renderPlayer() : null
+          (songsList && data) ? this.renderPlayer() : null
         }
       </View>
     )
@@ -327,7 +330,7 @@ class Player extends React.Component {
 export default class PlaylistScreen extends React.Component<Props, State> {
   static navigationOptions = ({ navigation }: NavigationScreenProps): NavigationStackScreenOptions => ({
     title: 'Playlist',
-    headerStyle: { backgroundColor: ColorUtil.GRAY }
+    headerStyle: { backgroundColor: ColorUtil.GRAY, font: 20 }
   });
 
   state: State = {
@@ -355,12 +358,12 @@ export default class PlaylistScreen extends React.Component<Props, State> {
   }
 }
 
-const paddingSize = 15
-const imgSize = 50
+const paddingSize = 20
+const imgSize = 70
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: ColorUtil.WHITE
+    backgroundColor: "#88c6d1"
   },
   container: {
     flex: 1,
@@ -371,11 +374,25 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    bottom: 0,
+    bottom: 0
+  }, 
+  songsContainer: {
+    top: 40,
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    bottom: 120
+  },
+  titleContainer: {
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: ColorUtil.GRAY
   },
   title: {
-    color: ColorUtil.BLACK,
-    fontSize: 14
+    position: 'absolute',
+    top: 0,
+    fontSize: 14,
+    marginVertical: 10,
   },
   progressStyle: {
     flexDirection: 'row',
@@ -402,17 +419,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around'
   },
+  songItem: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    borderBottomWidth: 1,
+    borderColor: ColorUtil.GRAY,
+    backgroundColor: "white"
+  },
   left: {
     padding: paddingSize,
   },
   right: {
-    paddingLeft: 0,
-    paddingRight: paddingSize,
-    paddingTop: paddingSize,
-    paddingBottom: paddingSize,
-    borderBottomWidth: 1,
-    borderColor: ColorUtil.GRAY,
-    // flex: 1,
+    marginVertical: 30,
+    paddingLeft: paddingSize,
+    justifyContent:'flex-start'
   },
   picture: {
     borderRadius: 4,
