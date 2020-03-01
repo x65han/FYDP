@@ -101,8 +101,61 @@
             "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000017.jpg?raw=true",
             "artist": "Timbaland",
             "name": "Apologize"
-        }
-        
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000018.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000018.jpg?raw=true",
+            "artist": "Idina Menzel",
+            "name": "Let it Go"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000019.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000019.jpg?raw=true",
+            "artist": "John Denver",
+            "name": "Take Me Home, Country Roads"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000020.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000020.jpg?raw=true",
+            "artist": "Emma Stone, Sonoya Mizuno, Callie Hernandez",
+            "name": "Someone in the Crowd"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000021.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000021.jpg?raw=true",
+            "artist": "Vampire Weekend",
+            "name": "Campus"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000022.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000022.jpg?raw=true",
+            "artist": "Demi Lovato",
+            "name": "Skyscraper"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000023.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000023.jpg?raw=true",
+            "artist": "Michael Buble",
+            "name": "Let it Snow"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000024.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000024.jpg?raw=true",
+            "artist": "Nelly Furtado",
+            "name": "Parking Lot"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000025.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000025.jpg?raw=true",
+            "artist": "Jonathan Coulton",
+            "name": "A Laptop Like You"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000026.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000026.jpg?raw=true",
+            "artist": "Andrew Bird",
+            "name": "Tables and Chairs"
+        },
         
     ]
 }
