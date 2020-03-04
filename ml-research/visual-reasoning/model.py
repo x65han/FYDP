@@ -290,7 +290,7 @@ class Model(object):
         self.build_train_decoder()
 
         # Load the model. Can specify which model later
-        checkpoint_path = '/content/gdrive/My Drive/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
+        checkpoint_path = '/content/gdrive/My Drive/FYDP/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
         saver = tf.train.Saver()
         saver.restore(self.s, checkpoint_path)
 
@@ -343,7 +343,7 @@ class Model(object):
             print('Epoch: {}, train loss: {}, val loss: {}'.format(epoch, train_loss, val_loss))
 
             # save weights after finishing epoch
-            checkpoint_path = "/content/gdrive/My Drive/captioning/checkpoints/weights_" + str(epoch)
+            checkpoint_path = "/content/gdrive/My Drive/FYDP/captioning/checkpoints/weights_" + str(epoch)
             saver.save(self.s, checkpoint_path)
 
         print("Finished!")
