@@ -156,6 +156,24 @@
             "artist": "Andrew Bird",
             "name": "Tables and Chairs"
         },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000027.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000027.jpg?raw=true",
+            "artist": "Josh Turner",
+            "name": "Long Black Train"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000028.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000028.jpg?raw=true",
+            "artist": "John Mayer",
+            "name": "Stop This Train"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000029.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000029.jpg?raw=true",
+            "artist": "Skizzy Mars",
+            "name": "Girl on a Train"
+        }
         
     ]
 }
