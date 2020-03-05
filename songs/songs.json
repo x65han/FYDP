@@ -173,6 +173,24 @@
             "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000029.jpg?raw=true",
             "artist": "Skizzy Mars",
             "name": "Girl on a Train"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000030.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000030.jpg?raw=true",
+            "artist": "The Walls Group",
+            "name": "Perfect People"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000031.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000031.jpg?raw=true",
+            "artist": "Dave Alvin",
+            "name": "Bus Station"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000032.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000032.jpg?raw=true",
+            "artist": "The Gray Havens",
+            "name": "Train Station"
         }
         
     ]
