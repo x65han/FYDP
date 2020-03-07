@@ -10,6 +10,7 @@ import { RouteParams } from './Router';
 import { Session, Playlist } from './data';
 import { Audio, Video } from 'expo-av';
 import { AntDesign } from '@expo/vector-icons';
+import AutoScrolling from "react-native-auto-scrolling";
 
 interface Props extends NavigationScreenProps { }
 
@@ -230,6 +231,7 @@ class Player extends React.Component {
 
     for (let i = 0; i < this.props.myPlaylist.length; i++) {
       let song = this.props.myPlaylist[i];
+      let match = song.match;
       list.push(
         <TouchableHighlight
           key={i}
@@ -248,6 +250,11 @@ class Player extends React.Component {
             <View style={styles.right}>
               <Text>Name: {song.name}</Text>
               <Text>Artist: {song.artist}</Text>
+              <View style={styles.match}>
+                <AutoScrolling style={{height: 20}}>
+                  <Text style={{color: "white"}}>{match}</Text>
+                </AutoScrolling>
+              </View>
             </View>
           </View>
         </TouchableHighlight>
@@ -266,9 +273,9 @@ class Player extends React.Component {
           <View style={styles.captionContainer}>
             <Text style={styles.caption}>Text: {this.props.image2Text}</Text>
           </View>
-          <View style={styles.songsContainer}>
+          <ScrollView style={styles.songsContainer}>
             {this.generateMusicList()}
-          </View>
+          </ScrollView>
           <View style={styles.progressStyle}>
             <Text style={{ width: 35, fontSize: 11, color: ColorUtil.BLACK, marginLeft: 5 }}>{this.getTimestamp()}</Text>
             <Slider
@@ -396,7 +403,8 @@ const styles = StyleSheet.create({
     top: 100,
     position: 'absolute',
     right: 0,
-    left: 0
+    left: 0,
+    bottom: 120
   },
   titleContainer: {
     alignItems: 'center',
@@ -408,7 +416,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     top: 40
-    // backgroundColor: "#88c6d1"
   },
   title: {
     position: 'absolute',
@@ -456,9 +463,16 @@ const styles = StyleSheet.create({
     padding: paddingSize,
   },
   right: {
-    marginVertical: 30,
-    paddingLeft: paddingSize,
+    marginVertical: 23,
     justifyContent: 'flex-start'
+  },
+  match: {
+    backgroundColor: "#88c6d1",
+    alignItems: 'flex-start',
+    marginTop: 5,
+    borderRadius: 5,
+    padding: 5,
+    width: 250
   },
   picture: {
     borderRadius: 4,
