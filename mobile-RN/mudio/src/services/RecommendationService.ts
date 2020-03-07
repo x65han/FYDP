@@ -8,12 +8,13 @@ class RecommendationService {
         const file_name = Uploader.get_file_name_from_path(session.uri)
         const res = await axios.get(SERVER_URL + '/recommend/' + file_name)
 
-        const {status, playlist} = res.data
+        const {image2text, status, playlist} = res.data
 
+        console.log('[RecommendationService]', image2text)
         console.log('[RecommendationService][1/2]', status, file_name)
         console.log('[RecommendationService][2/2]', playlist)
 
-        return playlist
+        return { image2text, playlist }
     }
 }
 

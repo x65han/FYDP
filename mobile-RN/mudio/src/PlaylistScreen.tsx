@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableHighlight, Slider, Platform, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, Slider, Platform, ScrollView, Dimensions } from 'react-native';
 import {
   NavigationScreenProps,
   NavigationStackScreenOptions,
@@ -14,6 +14,7 @@ import { AntDesign } from '@expo/vector-icons';
 interface Props extends NavigationScreenProps { }
 
 interface State {
+  image2text: string,
   playlist: Array<Playlist>,
   hasPlaylist: boolean,
 }
@@ -262,9 +263,12 @@ class Player extends React.Component {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Playing: {this.state.playbackInstanceName}</Text>
           </View>
-          <ScrollView style={styles.songsContainer}>
+          <View style={styles.captionContainer}>
+            <Text style={styles.caption}>Text: {this.props.image2Text}</Text>
+          </View>
+          <View style={styles.songsContainer}>
             {this.generateMusicList()}
-          </ScrollView>
+          </View>
           <View style={styles.progressStyle}>
             <Text style={{width: 35, fontSize: 11, color: ColorUtil.BLACK, marginLeft: 5}}>{this.getTimestamp()}</Text>
             <Slider
@@ -334,6 +338,7 @@ export default class PlaylistScreen extends React.Component<Props, State> {
   });
 
   state: State = {
+    image2text: "",
     hasPlaylist: false,
     playlist: [],
   }
@@ -342,9 +347,8 @@ export default class PlaylistScreen extends React.Component<Props, State> {
     if (this.state.hasPlaylist === true) return
 
     const session: Session = this.props.navigation.getParam(RouteParams.session)
-    const playlist = await RecommendationService.getRecommendation(session)
-
-    this.setState({ playlist, hasPlaylist: true })
+    const {image2text, playlist} = await RecommendationService.getRecommendation(session)
+    this.setState({ image2text, playlist, hasPlaylist: true })
   }
 
   render() {
@@ -352,7 +356,7 @@ export default class PlaylistScreen extends React.Component<Props, State> {
       <View style={styles.root}>
         {/* <Text>Playlist page {this.props.navigation.getParam(RouteParams.sessionKey)}</Text> */}
         {/* <View>{this.generateMusicList()}</View> */}
-        <Player myPlaylist={this.state.playlist}/>
+        <Player myPlaylist={this.state.playlist} image2Text={this.state.image2text}/>
       </View >
     );
   }
@@ -363,7 +367,7 @@ const imgSize = 70
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#88c6d1"
+    backgroundColor: "white"
   },
   container: {
     flex: 1,
@@ -377,16 +381,22 @@ const styles = StyleSheet.create({
     bottom: 0
   }, 
   songsContainer: {
-    top: 40,
+    top: 100,
     position: 'absolute',
     right: 0,
-    left: 0,
-    bottom: 120
+    left: 0
   },
   titleContainer: {
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: ColorUtil.GRAY
+  },
+  captionContainer: {
+    width: Dimensions.get('window').width,
+    alignItems: 'center',
+    position: 'absolute',
+    top: 40
+    // backgroundColor: "#88c6d1"
   },
   title: {
     position: 'absolute',
@@ -394,6 +404,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginVertical: 10,
   },
+  caption: {
+    fontSize: 14,
+    marginVertical: 10,
+  }, 
   progressStyle: {
     flexDirection: 'row',
     marginHorizontal: 10,
