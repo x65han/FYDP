@@ -24,6 +24,7 @@ export default createStackNavigator(
       [RouteConfig.HistoryListScreen]: HistoryListScreen,
       [RouteConfig.SettingsScreen]: SettingsScreen,
       [RouteConfig.PlaylistScreen]: PlaylistScreen,
+      [RouteConfig.UploadScreen]: UploadScreen,
     }),
     CameraStack: createStackNavigator({
       [RouteConfig.CameraScreen]: CameraScreen,

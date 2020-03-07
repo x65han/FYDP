@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableHighlight, Slider, Platform, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Image, ActivityIndicator, TouchableHighlight, Slider, Platform, ScrollView, Dimensions } from 'react-native';
 import {
   NavigationScreenProps,
   NavigationStackScreenOptions,
@@ -236,7 +236,7 @@ class Player extends React.Component {
           underlayColor={ColorUtil.DARK_GRAY}
           onPress={this.onMusicPressed.bind(this, i)}
           disabled={this.state.isLoading}
-          >
+        >
           <View style={styles.songItem}>
             <View style={styles.left}>
               <Image
@@ -259,7 +259,7 @@ class Player extends React.Component {
   private renderPlayer = () => {
     return (
       <View style={styles.bgContainer}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Playing: {this.state.playbackInstanceName}</Text>
           </View>
@@ -270,7 +270,7 @@ class Player extends React.Component {
             {this.generateMusicList()}
           </View>
           <View style={styles.progressStyle}>
-            <Text style={{width: 35, fontSize: 11, color: ColorUtil.BLACK, marginLeft: 5}}>{this.getTimestamp()}</Text>
+            <Text style={{ width: 35, fontSize: 11, color: ColorUtil.BLACK, marginLeft: 5 }}>{this.getTimestamp()}</Text>
             <Slider
               style={styles.slider}
               value={this.getSeekSliderPosition()}
@@ -280,8 +280,8 @@ class Player extends React.Component {
               onValueChange={this.onSeekSliderValueChange}
               onSlidingComplete={this.onSeekSliderSlidingComplete}
             />
-            <View style={{width: 35, alignItems: 'flex-end', marginRight: 5}}>
-              <Text style={{fontSize: 11, color: ColorUtil.BLACK}}>{this.getMMSSFromMillis(this.state.playbackInstanceDuration)}</Text>
+            <View style={{ width: 35, alignItems: 'flex-end', marginRight: 5 }}>
+              <Text style={{ fontSize: 11, color: ColorUtil.BLACK }}>{this.getMMSSFromMillis(this.state.playbackInstanceDuration)}</Text>
             </View>
           </View>
           <View style={styles.toolBar}>
@@ -290,20 +290,20 @@ class Player extends React.Component {
                 onPress={this.onBackPressed}
                 disabled={this.state.isLoading}
               >
-                <AntDesign name={'stepbackward'} size={25} color="#000"/>
+                <AntDesign name={'stepbackward'} size={25} color="#000" />
               </TouchableHighlight>
               <TouchableHighlight
-                style={{width: 35, height: 35, borderRadius: 20, borderWidth: 1, borderColor: ColorUtil.BLACK, justifyContent: 'center', alignItems: 'center'}}
+                style={{ width: 35, height: 35, borderRadius: 20, borderWidth: 1, borderColor: ColorUtil.BLACK, justifyContent: 'center', alignItems: 'center' }}
                 onPress={this.onPlayPausePressed}
                 disabled={this.state.isLoading}
               >
-                <AntDesign name={this.state.isPlaying ? 'pause' : 'caretright'} size={20} color="#000"/>
+                <AntDesign name={this.state.isPlaying ? 'pause' : 'caretright'} size={20} color="#000" />
               </TouchableHighlight>
               <TouchableHighlight
                 onPress={this.onForwardPressed}
                 disabled={this.state.isLoading}
               >
-                <AntDesign name={'stepforward'} size={25} color="#000"/>
+                <AntDesign name={'stepforward'} size={25} color="#000" />
               </TouchableHighlight>
             </View>
           </View>
@@ -352,19 +352,31 @@ export default class PlaylistScreen extends React.Component<Props, State> {
   }
 
   render() {
-    return (
+    const { playlist, hasPlaylist } = this.state;
+
+    return hasPlaylist ? (
       <View style={styles.root}>
         {/* <Text>Playlist page {this.props.navigation.getParam(RouteParams.sessionKey)}</Text> */}
         {/* <View>{this.generateMusicList()}</View> */}
         <Player myPlaylist={this.state.playlist} image2Text={this.state.image2text}/>
       </View >
-    );
+    ) : (
+        <View style={styles.loadingRoot}>
+          <ActivityIndicator size="large" color={ColorUtil.BLACK} />
+        </View>
+      )
   }
 }
 
 const paddingSize = 20
 const imgSize = 70
 const styles = StyleSheet.create({
+  loadingRoot: {
+    flex: 1,
+    backgroundColor: ColorUtil.WHITE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   root: {
     flex: 1,
     backgroundColor: "white"
@@ -379,7 +391,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0
-  }, 
+  },
   songsContainer: {
     top: 100,
     position: 'absolute',
@@ -446,7 +458,7 @@ const styles = StyleSheet.create({
   right: {
     marginVertical: 30,
     paddingLeft: paddingSize,
-    justifyContent:'flex-start'
+    justifyContent: 'flex-start'
   },
   picture: {
     borderRadius: 4,
