@@ -191,7 +191,80 @@
             "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000032.jpg?raw=true",
             "artist": "The Gray Havens",
             "name": "Train Station"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000033.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000033.jpg?raw=true",
+            "artist": "Brooks & Dunn",
+            "name": "Building Bridges"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000034.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000034.jpg?raw=true",
+            "artist": "Taylor Swift",
+            "name": "Cornelia Street"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000035.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000035.jpg?raw=true",
+            "artist": "Bruno Mars",
+            "name": "Girl in the window"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000036.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000036.jpg?raw=true",
+            "artist": "Travis",
+            "name": "Flowers in the Window"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000037.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000037.jpg?raw=true",
+            "artist": "The Go-Betweens",
+            "name": "Streets of Your Town"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000038.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000038.jpg?raw=true",
+            "artist": "Zac Brown Band",
+            "name": "Family Table"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000039.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000039.jpg?raw=true",
+            "artist": "Kenny Chesney",
+            "name": "Old Blue Chair"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000040.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000040.jpg?raw=true",
+            "artist": "Bruce Springsteen",
+            "name": "Streets of Philadelphia"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000041.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000041.jpg?raw=true",
+            "artist": "David Bowie & Mick Jagger",
+            "name": "Dancing in the Streets"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000042.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000042.jpg?raw=true",
+            "artist": "Elton John",
+            "name": "Burning Buildings"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000043.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000043.jpg?raw=true",
+            "artist": "The Bangles",
+            "name": "In Your Room"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000044.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000044.jpg?raw=true",
+            "artist": "Olivia Newton-John",
+            "name": "Angels in the Snow"
         }
+        
         
     ]
 }
