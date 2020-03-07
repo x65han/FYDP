@@ -1,0 +1,197 @@
+{
+    "songs": [
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000001.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000001.jpg?raw=true",
+            "artist": "Rae Sremmurd",
+            "name": "Black Beattles"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000002.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000002.jpg?raw=true",
+            "artist": "Drake",
+            "name": "Hotline Bling"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000003.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000003.jpg?raw=true",
+            "artist": "The Weekend",
+            "name": "Starboy"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000004.jpg?raw=true",
+            "artist": "Ed Sheeran",
+            "name": "Supermarket Flowers"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000005.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000005.jpg?raw=true",
+            "artist": "The Rolling Stones",
+            "name": "Like a Rolling Stone"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000006.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000006.jpg?raw=true",
+            "artist": "Emmy Rossum",
+            "name": "Think of Me"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000007.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000007.jpg?raw=true",
+            "artist": "Coldplay",
+            "name": "Yellow"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000008.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000008.jpg?raw=true",
+            "artist": "Eagles",
+            "name": "Hotel California"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000009.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000009.jpg?raw=true",
+            "artist": "Fools Garden",
+            "name": "Lemon Tree"
+        }, 
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000010.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000010.jpg?raw=true",
+            "artist": "Michael Jackson",
+            "name": "Billie Jean"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000011.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000011.jpg?raw=true",
+            "artist": "Celine Dion",
+            "name": "My Heart Will Go On"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000012.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000012.jpg?raw=true",
+            "artist": "John Lennon",
+            "name": "Imagine"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000013.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000013.jpg?raw=true",
+            "artist": "Mariah Carey",
+            "name": "All I Want for Christmas Is You"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000014.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000014.jpg?raw=true",
+            "artist": "OneRepublic",
+            "name": "Counting Stars"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000015.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000015.jpg?raw=true",
+            "artist": "Ben E. King",
+            "name": "Stand by Me"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000016.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000016.jpg?raw=true",
+            "artist": "The Beatles",
+            "name": "Hey Jude"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000017.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000017.jpg?raw=true",
+            "artist": "Timbaland",
+            "name": "Apologize"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000018.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000018.jpg?raw=true",
+            "artist": "Idina Menzel",
+            "name": "Let it Go"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000019.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000019.jpg?raw=true",
+            "artist": "John Denver",
+            "name": "Take Me Home, Country Roads"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000020.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000020.jpg?raw=true",
+            "artist": "Emma Stone, Sonoya Mizuno, Callie Hernandez",
+            "name": "Someone in the Crowd"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000021.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000021.jpg?raw=true",
+            "artist": "Vampire Weekend",
+            "name": "Campus"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000022.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000022.jpg?raw=true",
+            "artist": "Demi Lovato",
+            "name": "Skyscraper"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000023.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000023.jpg?raw=true",
+            "artist": "Michael Buble",
+            "name": "Let it Snow"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000024.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000024.jpg?raw=true",
+            "artist": "Nelly Furtado",
+            "name": "Parking Lot"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000025.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000025.jpg?raw=true",
+            "artist": "Jonathan Coulton",
+            "name": "A Laptop Like You"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000026.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000026.jpg?raw=true",
+            "artist": "Andrew Bird",
+            "name": "Tables and Chairs"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000027.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000027.jpg?raw=true",
+            "artist": "Josh Turner",
+            "name": "Long Black Train"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000028.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000028.jpg?raw=true",
+            "artist": "John Mayer",
+            "name": "Stop This Train"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000029.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000029.jpg?raw=true",
+            "artist": "Skizzy Mars",
+            "name": "Girl on a Train"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000030.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000030.jpg?raw=true",
+            "artist": "The Walls Group",
+            "name": "Perfect People"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000031.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000031.jpg?raw=true",
+            "artist": "Dave Alvin",
+            "name": "Bus Station"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000032.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000032.jpg?raw=true",
+            "artist": "The Gray Havens",
+            "name": "Train Station"
+        }
+        
+    ]
+}

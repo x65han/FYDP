@@ -23,4 +23,7 @@ def home():
 
 # Run Server
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Development Mode
+    # app.run(debug=True)
+    # Production Mode
+    app.run(host='0.0.0.0', port=8080)
