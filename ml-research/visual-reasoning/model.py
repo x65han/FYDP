@@ -290,14 +290,13 @@ class Model(object):
         self.build_train_decoder()
 
         # Load the model. Can specify which model later
-        checkpoint_path = '/content/gdrive/My Drive/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
+        checkpoint_path = '/content/gdrive/My Drive/FYDP/captioning/checkpoints/weights_' + str(self.checkpoint_epoch)
         saver = tf.train.Saver()
         saver.restore(self.s, checkpoint_path)
 
         self.build_inference_decoder()
 
         # Actual Inference Starts
-        print('[INFO] Inference process started')
         if plot:
             fig = plt.figure(figsize=(10, 10))
             plt.grid('off')
@@ -320,7 +319,6 @@ class Model(object):
         self.optimize()
 
         # Actual Training Starts
-        print('[INFO] Training process started')
         self.s.run(tf.global_variables_initializer())
         saver = tf.train.Saver()
 
@@ -345,7 +343,7 @@ class Model(object):
             print('Epoch: {}, train loss: {}, val loss: {}'.format(epoch, train_loss, val_loss))
 
             # save weights after finishing epoch
-            checkpoint_path = "/content/gdrive/My Drive/captioning/checkpoints/weights_" + str(epoch)
+            checkpoint_path = "/content/gdrive/My Drive/FYDP/captioning/checkpoints/weights_" + str(epoch)
             saver.save(self.s, checkpoint_path)
 
         print("Finished!")

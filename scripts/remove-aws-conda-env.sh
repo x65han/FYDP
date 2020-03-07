@@ -1,0 +1,23 @@
+conda env remove --name pytorch_p27 -y
+conda env remove --name pytorch_p36 -y
+conda env remove --name theano_p27 -y
+conda env remove --name theano_p36 -y
+conda env remove --name caffe2_p27 -y
+conda env remove --name caffe_p27 -y
+conda env remove --name caffe_p35 -y
+conda env remove --name chainer_p27 -y
+conda env remove --name chainer_p36 -y
+conda env remove --name cntk_p27 -y
+conda env remove --name cntk_p36 -y
+conda env remove --name mxnet_p27 -y
+conda env remove --name mxnet_p36 -y
+conda env remove --name amazonei_mxnet_p27 -y
+conda env remove --name amazonei_mxnet_p36 -y
+conda env remove --name amazonei_tensorflow_p27 -y
+conda env remove --name amazonei_tensorflow_p36 -y
+conda env remove --name aws_neuron_mxnet_p36 -y
+conda env remove --name aws_neuron_tensorflow_p36 -y
+conda env remove --name tensorflow_p27 -y
+conda env remove --name tensorflow2_p27 -y
+conda env remove --name python2 -y
+conda clean --all -y
