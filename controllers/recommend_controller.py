@@ -85,14 +85,17 @@ def recommend_given_file(file_path):
 
     # Song Matching
     print("Start NLP")
-    song_indices = nli_predict(image2text, 3)
+    song_indices, song_matches = nli_predict(image2text, 3)
     print("song_indices: ", song_indices)
 
     # Generate Random Recommendation
-    playlist = []
-    for i in song_indices:
-        playlist.append(Catalog['songs'][i])
+    playlist = [Catalog['songs'][i] for i in song_indices]
+    for k, i in enumerate(song_indices):
+        item = Catalog['songs'][i]
+        item['match'] = song_matches[k]
+        playlist.append(item)
 
+    # Cache and Return
     res = jsonify({
         'playlist': playlist,
         'image2text': image2text,
