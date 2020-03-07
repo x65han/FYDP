@@ -7,6 +7,7 @@ import random
 import json
 import cv2
 from ml_prod.image2text import model
+from ml_prod.match import nli_predict
 recommend_controller = Blueprint('recommend_controller', __name__)
 
 
@@ -82,15 +83,15 @@ def recommend_given_file(file_path):
     image2text = model.inference(cv2.imread(full_path), plot=False)
     print('Done [model].[inference]', image2text)
 
+    # Song Matching
+    print("Start NLP")
+    song_indices = nli_predict(image2text, 3)
+    print("song_indices: ", song_indices)
+
     # Generate Random Recommendation
     playlist = []
-    tabu = set()
-    i = 0
-    while len(tabu) < 3:
-        if random.uniform(0, 1) > 0.5 and i not in tabu:
-            playlist.append(Catalog['songs'][i])
-            tabu.add(i)
-        i = (i + 1) % len(Catalog['songs'])
+    for i in song_indices:
+        playlist.append(Catalog['songs'][i])
 
     res = jsonify({
         'playlist': playlist,
