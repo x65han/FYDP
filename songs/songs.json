@@ -239,7 +239,32 @@
             "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000040.jpg?raw=true",
             "artist": "Bruce Springsteen",
             "name": "Streets of Philadelphia"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000041.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000041.jpg?raw=true",
+            "artist": "David Bowie & Mick Jagger",
+            "name": "Dancing in the Streets"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000042.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000042.jpg?raw=true",
+            "artist": "Elton John",
+            "name": "Burning Buildings"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000043.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000043.jpg?raw=true",
+            "artist": "The Bangles",
+            "name": "In Your Room"
+        },
+        {
+            "uri": "https://github.com/y276lin/FYDP-static-assets/blob/master/000044.mp3?raw=true",
+            "coverImage": "https://github.com/y276lin/FYDP-static-assets/blob/master/000044.jpg?raw=true",
+            "artist": "Olivia Newton-John",
+            "name": "Angels in the Snow"
         }
+        
         
     ]
 }
