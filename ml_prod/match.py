@@ -1,17 +1,11 @@
 from pprint import pprint
-import torch
 from ml_prod.utils.file_utils import *
-# from ml_prod.utils.image_utils import *
-# from ml_prod.utils.generator_utils import *
-# from ml_prod.utils.tqdm_utils import *
-# from ml_prod.utils.keras_utils import *
-# from ml_prod.nli_models import InferSent
-
 from ml_prod.utils.file_utils import *
 from ml_prod.nli_models import InferSent
+from operator import itemgetter
 
 import shutil
-from operator import itemgetter
+import torch
 import pickle
 import os
 import numpy as np
