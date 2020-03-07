@@ -2,9 +2,16 @@ from flask import Blueprint, jsonify, request, send_file, render_template
 import imageio
 # imageio.plugins.ffmpeg.download()
 from moviepy.editor import VideoFileClip
-import os, random, json, cv2
+import os
+import random
+import json
+import cv2
 from ml_prod.image2text import model
 recommend_controller = Blueprint('recommend_controller', __name__)
+
+
+# Global Cache
+memory = {}
 
 # load songs.json
 with open('./songs/songs.json', 'r') as f:
@@ -24,15 +31,25 @@ def extract_frames(movie_path, times, duration=0):
     clip = VideoFileClip(movie_path)
     res_paths = []
     for t in times:
-        if t > duration: break
+        if t > duration:
+            break
         imgpath = '{}-{}.png'.format(movie_path[0:-4], t)
         res_paths.append(imgpath)
         clip.save_frame(imgpath, t)
 
     return res_paths
 
+
 @recommend_controller.route('/<string:file_path>')
 def recommend_given_file(file_path):
+    global memory
+
+    if file_path in memory:
+        print('[Recommend][Cache Hit]', file_path)
+        return memory[file_path]
+    else:
+        print('[Recommend][Cache Miss]', file_path)
+
     full_path = os.path.join('uploads', file_path)
     file_exists = validate_media_path(full_path)
     print('[Recommend][file_path][exists]', file_path, file_exists)
@@ -77,11 +94,15 @@ def recommend_given_file(file_path):
         i = (i + 1) % len(Catalog['songs'])
 
     print(request.base_url)
-    return jsonify({
+    res = jsonify({
         'playlist': playlist,
         'image2text': image2text,
         'img_url': request.base_url.replace('/recommend/', '/uploads/')
     })
+
+    memory[file_path] = res
+    return res
+
 
 @recommend_controller.route('/show/<string:file_path>')
 def recommend_show(file_path):
@@ -100,7 +121,7 @@ def recommend_show(file_path):
         return send_file(full_path, mimetype='image/png')
     else:
         file_name = file_path[:-4]
-        
+
         time = 0
         img_to_display = []
         while True:
@@ -114,6 +135,6 @@ def recommend_show(file_path):
 
         img_to_display = ['/' + path for path in img_to_display]
         return render_template(
-            'show.html', 
-            img_to_display=img_to_display, 
+            'show.html',
+            img_to_display=img_to_display,
         )

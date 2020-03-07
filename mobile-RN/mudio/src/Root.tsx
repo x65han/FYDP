@@ -7,9 +7,7 @@ import { Provider } from './data';
 export const applicationStateKey = 'ApplicationState';
 const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null;
 
-// export const SERVER_URL = 'http://localhost:5000';
-// export const SERVER_URL = 'https://mudio.herokuapp.com';
-export const SERVER_URL = 'http://ec2-3-134-84-255.us-east-2.compute.amazonaws.com:8080';
+export const SERVER_URL = 'http://ec2-3-19-221-241.us-east-2.compute.amazonaws.com:8080';
 
 export default class Root extends React.Component {
   state = {
@@ -27,7 +25,7 @@ export default class Root extends React.Component {
   }
 
   async componentDidMount() {
-    await this.clearData();
+    // await this.clearData();
     const rawData = await AsyncStorage.getItem(applicationStateKey);
     this.setState({
       initialState: rawData ? JSON.parse(rawData) : initialState,
