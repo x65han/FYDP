@@ -76,4 +76,4 @@ def nli_predict(caption, num_songs):
             match = lines[lyric_idx[k]]
             match_lyrics.append(match.strip())
 
-    return song_indices, match_lyrics
+    return song_indices[0:num_songs], match_lyrics[0:num_songs]
