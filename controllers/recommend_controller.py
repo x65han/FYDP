@@ -80,7 +80,6 @@ def recommend_given_file(file_path):
     # Image2Text
     print('Started [model].[inference]', full_path)
     image2text = model.inference(cv2.imread(full_path), plot=False)
-    # image2text = 'tbd'
     print('Done [model].[inference]', image2text)
 
     # Generate Random Recommendation
@@ -93,7 +92,6 @@ def recommend_given_file(file_path):
             tabu.add(i)
         i = (i + 1) % len(Catalog['songs'])
 
-    print(request.base_url)
     res = jsonify({
         'playlist': playlist,
         'image2text': image2text,
