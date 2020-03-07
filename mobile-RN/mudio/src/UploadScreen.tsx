@@ -53,22 +53,21 @@ export default class UploadScreen extends React.Component<Props, State> {
     this.setState({ size, uri })
 
     await Uploader.submit(uri, (progress: number) => {
-      setTimeout(() => {
-        if (this.state.completed === true) return;
-        this.setState({ progress })
+      if (this.state.completed === true) return;
+      this.setState({ progress })
 
-        if (progress === 100) {
-          this.setState({ completed: true })
-          this.props.navigation.dismiss()
+      if (progress === 100) {
+        this.setState({ completed: true })
+        this.props.navigation.pop()
+        this.props.navigation.pop()
 
-          setTimeout(() => {
-            this.props.navigation.push(RouteConfig.PlaylistScreen, {
-              [RouteParams.sessionKey]: sessionKey,
-              [RouteParams.session]: session,
-            })
-          }, 1000)
-        }
-      }, 2000)
+        setTimeout(() => {
+          this.props.navigation.push(RouteConfig.PlaylistScreen, {
+            [RouteParams.sessionKey]: sessionKey,
+            [RouteParams.session]: session,
+          })
+        }, 2000)
+      }
     })
   }
 

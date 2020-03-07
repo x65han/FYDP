@@ -10,10 +10,13 @@ import {
   NavigationStackScreenOptions,
 } from 'react-navigation';
 import { RouteConfig, RouteParams } from './Router';
-import { Consumer, ApplicationState,Session } from './data';
+import { Consumer, ApplicationState, Session, DataHelper, mutators } from './data';
 import HistoryListItem from './components/HistoryListItem';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import ColorUtil from './services/ColorUtil';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions'
+import TimestampUtil from './services/TimestampUtil';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -27,17 +30,30 @@ export default class HistoryListScreen extends React.Component<Props> {
     headerStyle: { backgroundColor: ColorUtil.GRAY },
     headerRight: (
       <TouchableOpacity
-        onPress={() => {
-          navigation.push(RouteConfig.SettingsScreen)
+        onPress={async () => {
+          // navigation.push(RouteConfig.SettingsScreen)
+          const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+          let pickerResult = await ImagePicker.launchImageLibraryAsync();
+          const sessionKey = TimestampUtil.generateTimestamp(true);
+          const uri = pickerResult.uri;
+          const isVideo = false;
+          await mutators.savePhoto({ sessionKey, uri, isVideo });
+
+          const session: Session = DataHelper.createNewSession(uri, isVideo)
+
+          navigation.push(RouteConfig.UploadScreen, {
+            [RouteParams.sessionKey]: sessionKey,
+            [RouteParams.session]: session,
+          })
         }}
         style={styles.settingsButton}
       >
-        <FontAwesome name="cog" size={26} color="black" />
+        <FontAwesome name="cloud-upload" size={26} color="black" />
       </TouchableOpacity>
     ),
   });
 
-  private onPressItem = (sessionKey: string, session:Session) => {
+  private onPressItem = (sessionKey: string, session: Session) => {
     this.props.navigation.navigate(RouteConfig.PlaylistScreen, {
       [RouteParams.sessionKey]: sessionKey,
       [RouteParams.session]: session,
