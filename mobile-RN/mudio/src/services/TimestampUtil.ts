@@ -1,8 +1,8 @@
 import timeAgo from 'node-time-ago';
 
 class TimestampUtil {
-    public generateTimestamp() {
-        const d = new Date()
+    public generateTimestamp(random=false) {
+        const d = random ? new Date(+(new Date()) - Math.floor(Math.random()*30000000000)) : new Date()
         const year: String = d.getFullYear().toString();
         let month = (d.getMonth() + 1).toString();
         let day = d.getDate().toString();
