@@ -15,7 +15,7 @@ def get_all_files_from_dir(directory):
     file_paths = []
     for root, dirs, files in os.walk(directory):
         file_paths += [os.path.join(root, x) for x in files]
-    return file_paths
+    return sorted(file_paths)
 
 
 def read_raw_from_tar(tar_fn, fn):
