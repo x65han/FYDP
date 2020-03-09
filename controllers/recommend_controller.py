@@ -64,23 +64,27 @@ def recommend_given_file(file_path):
 
     # isVideo -> boolean
     isVideo = file_path[-4:] in {'.mov'}
-    extracted_frames_path = [full_path]
+    # extracted_frames_path = [full_path]
 
     # Extract Frames from Video
+    # if isVideo:
+    #     duration = get_video_duration(full_path)
+
+    #     times = []
+    #     time = 0
+    #     while time <= duration:
+    #         times.append(time)
+    #         time += 0.5
+
+    #     extracted_frames_path = extract_frames(full_path, times, duration)
     if isVideo:
         duration = get_video_duration(full_path)
-
-        times = []
-        time = 0
-        while time <= duration:
-            times.append(time)
-            time += 0.5
-
-        extracted_frames_path = extract_frames(full_path, times, duration)
+        extracted_frames_path = extract_frames(full_path, [0.5], duration)
 
     # Image2Text
-    print('Started [model].[inference]', full_path)
-    image2text = model.inference(cv2.imread(full_path), plot=False)
+    cv_path = extract_frames[0] if isVideo else full_path
+    print('Started [model].[inference]', cv_path)
+    image2text = model.inference(cv2.imread(cv_path), plot=False)
     print('Done [model].[inference]', image2text)
 
     # Song Matching
