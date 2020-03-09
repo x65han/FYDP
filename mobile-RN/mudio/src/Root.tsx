@@ -6,7 +6,7 @@ import { Provider } from './data';
 
 export const applicationStateKey = 'ApplicationState';
 const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null;
-export const SERVER_URL = 'http://ec2-3-19-221-241.us-east-2.compute.amazonaws.com:8080';
+export const SERVER_URL = 'http://ec2-18-220-203-160.us-east-2.compute.amazonaws.com:8080';
 
 export default class Root extends React.Component {
   state = {
