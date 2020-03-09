@@ -1,10 +1,11 @@
 # FYDP
 
 Our team:
-Machine Learning Engineer: [Michael Wang](https://www.linkedin.com/in/michael-yuanxin-wang/), 
-Infrastructure Engineer: [Johnson Han](https://www.linkedin.com/in/x65han/), 
-Mobile Engineer: [Sophia Liu](https://www.linkedin.com/in/sophia-xizi-liu/), 
-Data Scientist: [Vera Lin](https://www.linkedin.com/in/y276lin/), 
+
+Data Science & Machine Learning: [Michael Wang](https://www.linkedin.com/in/michael-yuanxin-wang/), [Vera Lin](https://www.linkedin.com/in/y276lin/)
+
+Full Stack Infrastructure & Mobile: [Johnson Han](https://www.linkedin.com/in/x65han/), [Sophia Liu](https://www.linkedin.com/in/sophia-xizi-liu/)
+
 Project Manager: [Taylor Zhang](https://www.linkedin.com/in/xingzhi-taylor-zhang-737401151/)
 
 
