@@ -32,9 +32,9 @@ export default class HistoryListScreen extends React.Component<Props> {
       <TouchableOpacity
         onPress={async () => {
           // navigation.push(RouteConfig.SettingsScreen)
-          const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+          const _ = await Permissions.askAsync(Permissions.CAMERA_ROLL);
           let pickerResult = await ImagePicker.launchImageLibraryAsync();
-          const sessionKey = TimestampUtil.generateTimestamp(true);
+          const sessionKey = TimestampUtil.generateTimestamp();
           const uri = pickerResult.uri;
           const isVideo = false;
           await mutators.savePhoto({ sessionKey, uri, isVideo });
