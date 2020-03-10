@@ -82,7 +82,7 @@ def recommend_given_file(file_path):
         extracted_frames_path = extract_frames(full_path, [0.5], duration)
 
     # Image2Text
-    cv_path = extract_frames[0] if isVideo else full_path
+    cv_path = extracted_frames_path[0] if isVideo else full_path
     print('Started [model].[inference]', cv_path)
     image2text = model.inference(cv2.imread(cv_path), plot=False)
     print('Done [model].[inference]', image2text)
