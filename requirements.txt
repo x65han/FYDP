@@ -1,6 +1,6 @@
 Flask==1.1.1
 matplotlib==2.2.3
-opencv-python==4.1.0.25
+opencv-python==4.1.1.26
 Flask-RESTful==0.3.7
 flask-marshmallow==0.10.1
 Flask-SQLAlchemy==2.4.0
